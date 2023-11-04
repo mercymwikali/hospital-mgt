@@ -1,55 +1,55 @@
 import React, { useState } from 'react';
 import { Divider, Radio, Table } from 'antd';
 import { BiCalendar, BiEdit } from 'react-icons/bi';
-import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined } from '@ant-design/icons';
+import { UserOutlined, MailOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import { Link } from 'react-router-dom';
 
 const columns = [
     {
         dataIndex: '',
-        responsive: ['md'],
+        responsive: ['sm'],
 
     },
     {
         title: 'No',
         dataIndex: 'No',
-        responsive: ['md'],
+        responsive: ['sm'],
     },
     {
         title: 'Surname',
         dataIndex: 'Surname',
-        responsive: ['md'],
+        responsive: ['sm'],
 
     },
     {
         title: 'Other Names',
         dataIndex: 'Other Names',
-        responsive: ['md'],
+        responsive: ['sm'],
 
     },
     {
         title: 'ID Number',
         dataIndex: 'ID Number',
-        responsive: ['md'],
+        responsive: ['sm'],
 
     },
     {
         title: 'Tel',
         dataIndex: 'Tel',
-        responsive: ['md'],
+        responsive: ['sm'],
 
     },
     {
         title: 'Gender',
         dataIndex: 'Gender',
-        responsive: ['md'],
+        responsive: ['sm'],
 
     },
     {
         title: 'Date_Registered',
         dataIndex: 'Date-Registered',
-        responsive: ['md'],
+        responsive: ['sm'],
     },
 ];
 
@@ -135,9 +135,10 @@ const Patientlist = () => {
                     <Link to="/addPatient" className="btn btn-primary">Add Patient</Link>
                     <Link href="#" className="btn btn-secondary">Create a Visit</Link>
                     <Link href="#" className="btn btn-primary">Edit Page</Link>
+                    <Link to='/patient-list' className="btn btn-danger"><DeleteOutlined className='px-2'/>Delete</Link>
                 </div>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive-lg">
                <Table
                 rowSelection={{
                     type: selectionType,
@@ -147,6 +148,7 @@ const Patientlist = () => {
                 dataSource={data}
                 scroll='scroll'
                 style={{color:"#fff"}}
+                className='table'
             />  
             </div>
            

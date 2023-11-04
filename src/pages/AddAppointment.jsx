@@ -1,29 +1,12 @@
 import React from 'react'
-import { Tabs, message, Avatar, Descriptions, Input, DatePicker, Dropdown, Space } from 'antd';
+import { Tabs, message, Avatar, Descriptions, Input, DatePicker, Select, Spa, Selectce } from 'antd';
 import TabPane from 'antd/es/tabs/TabPane';
 import { IoInformation, IoBook } from 'react-icons/io5';
 import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined, DownOutlined } from '@ant-design/icons';
 import { BiCalendar, BiEdit } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
-const menuItems = [
-    {
-        key: '/triage',
-        label: (
-            <Link target='_blank' rel='noopener noreferrer' to='/triage'>Triage</Link>
-        )
-    },
-    {
-        key: '/dialysis',
-        label: (
-            <Link target='_blank' rel='noopener noreferrer' to='/triage'>Dialysis</Link>
-        )
-    }
-];
 
-const onClick = ({ key }) => {
-    message.info(`Click on item ${key}`);
-  };
 const AddAppointment = () => {
     return (
         <div className="card border-primary py-2 px-2 ">
@@ -41,21 +24,21 @@ const AddAppointment = () => {
                     <TabPane tab="Patient Information">
                         <Avatar className="card-text" size={100}></Avatar>
                         <Descriptions title="Patient Info">
-                            <Descriptions.Item label="Patient ID:" icon={<IoBook />}><Input
+                            <Descriptions.Item label="Patient ID" icon={<IoBook />}><Input
                                 style={{
                                     width: '80%',
                                 }}
                                 defaultValue=""
                             /></Descriptions.Item>
 
-                            <Descriptions.Item label="Patient Type:" icon={<IoBook />}>
+                            <Descriptions.Item label="Patient Type" icon={<IoBook />}>
                                 <select className="form-select form-select-sm" aria-label="Default select example" style={{ width: '75%' }}>
                                     <option selected></option>
                                     <option value="Corporate">Corporate</option>
                                     <option value="Cash">Cash</option>
                                 </select>
                             </Descriptions.Item>
-                            <Descriptions.Item label="Settlement Type:" icon={<IoBook />}>
+                            <Descriptions.Item label="Settlement Type" icon={<IoBook />}>
                                 <select className="form-select form-select-sm" aria-label="Default select example" style={{ width: '75%' }}>
                                     <option selected></option>
                                     <option value="Corporate">Corporate</option>
@@ -64,20 +47,20 @@ const AddAppointment = () => {
 
                                 </select>
                             </Descriptions.Item>
-                            <Descriptions.Item label="Insurance:" icon={<IoBook />}>
+                            <Descriptions.Item label="Insurance" icon={<IoBook />}>
                                 <select className="form-select form-select-sm" aria-label="Default select example" style={{ width: '75%' }}>
                                     <option selected></option>
                                     <option value="Corporate">Corporate</option>
                                     <option value="Cash">Cash</option>
                                 </select>
                             </Descriptions.Item>
-                            <Descriptions.Item label="Membership No:" icon={<IoBook />}><Input
+                            <Descriptions.Item label="Membership No" icon={<IoBook />}><Input
                                 style={{
                                     width: '80%',
                                 }}
                                 defaultValue=""
                             /></Descriptions.Item>
-                            <Descriptions.Item label="MCC No:" icon={<IoBook />}><Input
+                            <Descriptions.Item label="MCC No" icon={<IoBook />}><Input
                                 style={{
                                     width: '80%',
                                 }}
@@ -92,14 +75,21 @@ const AddAppointment = () => {
                 </Tabs>
                 <div className="d-flex align-items-center justify-content-center gap-3 my-3">
                     <div className=" d-flex text-center gap-3 align-items-center ">
-                        <Link href="#" className="btn btn-primary">Save Patient</Link>
-                        <Dropdown menu={{ menuItems, onClick }}>
-                            <Link className='text-decoration-none' onClick={(e) => {
-                                e.preventDefault()
-                            }}>
-                                <div className="btn btn-secondary d-flex"><p>Dispatch To</p><DownOutlined className='ps-2' /></div>
+                        <div className="dropdown">
+                            <Link className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dispatch To
                             </Link>
-                        </Dropdown>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><Link className="dropdown-item" to="#">Triage</Link></li>
+                                <li><Link className="dropdown-item" to="#">Dialysis</Link></li>
+                                <li><Link className="dropdown-item" to="#">Doctor</Link></li>
+                                <li><Link className="dropdown-item" to="#">Physio</Link></li>
+                                <li><Link className="dropdown-item" to="#">Pharmacy</Link></li>
+                                <li><Link className="dropdown-item" to="#">CCC</Link></li>
+                                <li><Link className="dropdown-item" to="#">ANC</Link></li>
+                            </ul>
+                        </div>
+                        <Link href="#" className="btn btn-primary">Save Patient</Link>
                         <Link href="#" className="btn btn-primary">Reset Page</Link>
                     </div>
                 </div>

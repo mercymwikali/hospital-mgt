@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Divider, Radio, Select, Table } from 'antd';
+import { RangePicker, Divider, Radio, Select, Table, DatePicker } from 'antd';
 import { BiCalendar, BiEdit } from 'react-icons/bi';
 import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined } from '@ant-design/icons';
 
@@ -18,9 +18,10 @@ const rowSelection = {
         name: record.name,
     }),
 };
-const Appointmentlist = () => {
+const Procedurequeues = () => {
     const [searchedText, setsearchedText] = useState('');
     const [selectionType, setSelectionType] = useState('checkbox');
+    const { RangePicker } = DatePicker
 
 
     const columns = [
@@ -28,11 +29,6 @@ const Appointmentlist = () => {
             dataIndex: '',
             responsive: ['sm'],
 
-        },
-        {
-            title: 'Admn No',
-            dataIndex: 'Admission No',
-            responsive: ['sm'],
         },
         {
             title: 'Patient No',
@@ -62,28 +58,33 @@ const Appointmentlist = () => {
 
         },
         {
-            title: ' Names',
-            dataIndex: 'Names',
+            title: ' Search Names',
+            dataIndex: ' Search Names',
             responsive: ['sm'],
 
         },
         {
-            title: 'Appmnt Date',
-            dataIndex: 'Appointment Date',
+            title: 'Treatment No',
+            dataIndex: 'Treatment No',
             responsive: ['sm'],
 
         },
         {
-            title: 'Appointment Time',
-            dataIndex: 'Appointment Time',
+            title: 'Procedure',
+            dataIndex: 'Procedure',
             responsive: ['sm'],
 
         },
         {
-            title: 'Appointment Type',
-            dataIndex: 'Appointment Type',
+            title: 'Department',
+            dataIndex:'Department',
             responsive: ['sm'],
 
+        },
+        {
+            title: 'Employee',
+            dataIndex: 'Employee',
+            responsive: ['sm'],
         },
         {
             title: 'Doctor',
@@ -91,13 +92,13 @@ const Appointmentlist = () => {
             responsive: ['sm'],
         },
         {
-            title: 'Settlement',
-            dataIndex: 'Settlement',
+            title: 'Wait Time',
+            dataIndex: 'Wait Time',
             responsive: ['sm'],
         },
         {
-            title: 'Remarks',
-            dataIndex: 'Remarks',
+            title: 'Date',
+            dataIndex: 'Date',
             responsive: ['sm'],
         },
         {
@@ -105,7 +106,7 @@ const Appointmentlist = () => {
             dataIndex: 'Status',
             responsive: ['sm'],
         },
-    ];
+           ];
     const data = [
         {
             key: '1',
@@ -179,14 +180,14 @@ const Appointmentlist = () => {
     return (
         <div>
             <div className="d-flex justify-content-between aign-items center">
-                <h5 className="card-title h4"><u>Appointment List</u></h5>
+                <h5 className="card-title h4"><u>Outpatient Procedures</u></h5>
                 <BiEdit style={{ fontSize: 20, marginRight: 12, cursor: "pointer" }} />
             </div>
             <Divider />
             <div className="d-flex align-items-center justify-content-between gap-3 mb-3">
                 <ReloadOutlined style={{ fontSize: 20, padding: 8, cursor: "pointer" }} />
                 <div className=" d-flex text-center gap-3">
-                    <Link to="/addPatient" className="btn btn-primary">Book New Appointment</Link>
+                    <Link to="/observation-list" className="btn btn-primary">Observation List</Link>
                     <div className="dropdown">
                         <Link className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             Dispatch To
@@ -201,12 +202,12 @@ const Appointmentlist = () => {
                             <li><Link className="dropdown-item" to="#">ANC</Link></li>
                         </ul>
                     </div>
-                    <Link href="#" className="btn btn-primary">Edit Page</Link>
+                    <Link to='/patient-list' className="btn btn-primary">Patient List</Link>
                 </div>
             </div>
             <div className="table-responsive-lg">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                    <Select className='w-25' placeholder='Search by . . . ' onSearch={(value)=>{
+                <div className="d-flex justify-content-between align-items-center my-3">
+                    <Select className='w-25' placeholder='Search by . . . ' onSearch={(value) => {
                         setsearchedText(value);
                     }}>
                         <option value='1'>Patient No</option>
@@ -214,6 +215,8 @@ const Appointmentlist = () => {
                         <option value='Name'>Names</option>
 
                     </Select>
+                    <RangePicker />
+
                     <div className="dropdown border border-1 rounded">
                         <Link className="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             Export File To
@@ -244,4 +247,4 @@ const Appointmentlist = () => {
         </div>
     );
 };
-export default Appointmentlist;
+export default Procedurequeues;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Divider, Radio, Select, Table } from 'antd';
+import { RangePicker, Divider, Radio, Select, Table, DatePicker } from 'antd';
 import { BiCalendar, BiEdit } from 'react-icons/bi';
 import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined } from '@ant-design/icons';
 
@@ -18,9 +18,10 @@ const rowSelection = {
         name: record.name,
     }),
 };
-const Appointmentlist = () => {
+const TreatmentSheet = () => {
     const [searchedText, setsearchedText] = useState('');
     const [selectionType, setSelectionType] = useState('checkbox');
+    const { RangePicker } = DatePicker
 
 
     const columns = [
@@ -28,11 +29,6 @@ const Appointmentlist = () => {
             dataIndex: '',
             responsive: ['sm'],
 
-        },
-        {
-            title: 'Admn No',
-            dataIndex: 'Admission No',
-            responsive: ['sm'],
         },
         {
             title: 'Patient No',
@@ -68,20 +64,14 @@ const Appointmentlist = () => {
 
         },
         {
-            title: 'Appmnt Date',
-            dataIndex: 'Appointment Date',
+            title: 'Observation Date',
+            dataIndex: 'Observation Date',
             responsive: ['sm'],
 
         },
         {
-            title: 'Appointment Time',
-            dataIndex: 'Appointment Time',
-            responsive: ['sm'],
-
-        },
-        {
-            title: 'Appointment Type',
-            dataIndex: 'Appointment Type',
+            title: 'Observation Time',
+            dataIndex: 'Observation Time',
             responsive: ['sm'],
 
         },
@@ -89,20 +79,37 @@ const Appointmentlist = () => {
             title: 'Doctor',
             dataIndex: 'Doctor',
             responsive: ['sm'],
+
         },
         {
-            title: 'Settlement',
-            dataIndex: 'Settlement',
+            title: 'Insurance',
+            dataIndex:'Insurance',
+            responsive: ['sm'],
+
+        },
+        {
+            title: 'Patient Type',
+            dataIndex: 'Patient Type',
             responsive: ['sm'],
         },
         {
-            title: 'Remarks',
-            dataIndex: 'Remarks',
+            title: 'Waiting At Rm',
+            dataIndex: 'Waiting At Rm',
             responsive: ['sm'],
         },
         {
-            title: 'Status',
-            dataIndex: 'Status',
+            title: 'Age',
+            dataIndex: 'Age',
+            responsive: ['sm'],
+        },
+        {
+            title: 'Years',
+            dataIndex: 'Years',
+            responsive: ['sm'],
+        },
+        {
+            title: 'Branch',
+            dataIndex: 'Branch',
             responsive: ['sm'],
         },
     ];
@@ -179,7 +186,7 @@ const Appointmentlist = () => {
     return (
         <div>
             <div className="d-flex justify-content-between aign-items center">
-                <h5 className="card-title h4"><u>Appointment List</u></h5>
+                <h5 className="card-title h4"><u>Observation List</u></h5>
                 <BiEdit style={{ fontSize: 20, marginRight: 12, cursor: "pointer" }} />
             </div>
             <Divider />
@@ -201,12 +208,12 @@ const Appointmentlist = () => {
                             <li><Link className="dropdown-item" to="#">ANC</Link></li>
                         </ul>
                     </div>
-                    <Link href="#" className="btn btn-primary">Edit Page</Link>
+                    <Link to='/patient-list' className="btn btn-primary">Patient List</Link>
                 </div>
             </div>
             <div className="table-responsive-lg">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                    <Select className='w-25' placeholder='Search by . . . ' onSearch={(value)=>{
+                <div className="d-flex justify-content-between align-items-center my-3">
+                    <Select className='w-25' placeholder='Search by . . . ' onSearch={(value) => {
                         setsearchedText(value);
                     }}>
                         <option value='1'>Patient No</option>
@@ -214,6 +221,8 @@ const Appointmentlist = () => {
                         <option value='Name'>Names</option>
 
                     </Select>
+                    <RangePicker />
+
                     <div className="dropdown border border-1 rounded">
                         <Link className="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             Export File To
@@ -244,4 +253,4 @@ const Appointmentlist = () => {
         </div>
     );
 };
-export default Appointmentlist;
+export default TreatmentSheet;

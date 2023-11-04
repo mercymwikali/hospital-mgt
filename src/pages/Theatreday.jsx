@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Divider, Radio, Select, Table } from 'antd';
+import { RangePicker, Divider, Radio, Select, Table, DatePicker } from 'antd';
 import { BiCalendar, BiEdit } from 'react-icons/bi';
-import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined } from '@ant-design/icons';
+import { PlusOutlined, DeleteOutlined, DollarOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import { Link } from 'react-router-dom';
 import Input from 'antd/es/input/Input';
@@ -18,9 +18,10 @@ const rowSelection = {
         name: record.name,
     }),
 };
-const Appointmentlist = () => {
+const Theatreday = () => {
     const [searchedText, setsearchedText] = useState('');
     const [selectionType, setSelectionType] = useState('checkbox');
+    const { RangePicker } = DatePicker
 
 
     const columns = [
@@ -28,11 +29,6 @@ const Appointmentlist = () => {
             dataIndex: '',
             responsive: ['sm'],
 
-        },
-        {
-            title: 'Admn No',
-            dataIndex: 'Admission No',
-            responsive: ['sm'],
         },
         {
             title: 'Patient No',
@@ -68,20 +64,14 @@ const Appointmentlist = () => {
 
         },
         {
-            title: 'Appmnt Date',
-            dataIndex: 'Appointment Date',
+            title: ' ID Number',
+            dataIndex: 'ID Number',
             responsive: ['sm'],
 
         },
         {
-            title: 'Appointment Time',
-            dataIndex: 'Appointment Time',
-            responsive: ['sm'],
-
-        },
-        {
-            title: 'Appointment Type',
-            dataIndex: 'Appointment Type',
+            title: 'Admn Date',
+            dataIndex: 'Observation Date',
             responsive: ['sm'],
 
         },
@@ -89,22 +79,40 @@ const Appointmentlist = () => {
             title: 'Doctor',
             dataIndex: 'Doctor',
             responsive: ['sm'],
+
         },
         {
-            title: 'Settlement',
-            dataIndex: 'Settlement',
+            title: 'Bed',
+            dataIndex: 'Bed',
+            responsive: ['sm'],
+
+        },
+        {
+            title: 'Insurance',
+            dataIndex: 'Insurance',
+            responsive: ['sm'],
+
+        },
+        {
+            title: 'Patient Type',
+            dataIndex: 'Patient Type',
+            responsive: ['sm'],
+        },
+        {
+            title: 'Waiting At Rm',
+            dataIndex: 'Waiting At Rm',
+            responsive: ['sm'],
+        }, {
+            title: 'Admn Reason',
+            dataIndex: 'Branch',
             responsive: ['sm'],
         },
         {
             title: 'Remarks',
-            dataIndex: 'Remarks',
+            dataIndex: 'Years',
             responsive: ['sm'],
         },
-        {
-            title: 'Status',
-            dataIndex: 'Status',
-            responsive: ['sm'],
-        },
+
     ];
     const data = [
         {
@@ -179,18 +187,15 @@ const Appointmentlist = () => {
     return (
         <div>
             <div className="d-flex justify-content-between aign-items center">
-                <h5 className="card-title h4"><u>Appointment List</u></h5>
+                <h5 className="card-title h4"><u>Theatre Cases List</u></h5>
                 <BiEdit style={{ fontSize: 20, marginRight: 12, cursor: "pointer" }} />
             </div>
             <Divider />
             <div className="d-flex align-items-center justify-content-between gap-3 mb-3">
                 <ReloadOutlined style={{ fontSize: 20, padding: 8, cursor: "pointer" }} />
                 <div className=" d-flex text-center gap-3">
-                    <Link to="/addPatient" className="btn btn-primary">Book New Appointment</Link>
                     <div className="dropdown">
-                        <Link className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dispatch To
-                        </Link>
+                    <Link to='/Patient-Amdn' className="btn btn-primary"><PlusOutlined className='px-2'/>New Admission</Link>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><Link className="dropdown-item" to="#">Triage</Link></li>
                             <li><Link className="dropdown-item" to="#">Dialysis</Link></li>
@@ -201,19 +206,34 @@ const Appointmentlist = () => {
                             <li><Link className="dropdown-item" to="#">ANC</Link></li>
                         </ul>
                     </div>
-                    <Link href="#" className="btn btn-primary">Edit Page</Link>
+                    <Link to='/patient-list' className="btn btn-secondary"><DollarOutlined className='px-2'/>Charges</Link>
+                    <Link to='/patient-list' className="btn btn-danger"><DeleteOutlined className='px-2'/>Cancel Admission</Link>
+
                 </div>
             </div>
             <div className="table-responsive-lg">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                    <Select className='w-25' placeholder='Search by . . . ' onSearch={(value)=>{
+                <div className="d-flex justify-content-between align-items-center my-3">
+                    <Select className='w-25' placeholder='Search by Doctor . . . ' onSearch={(value) => {
                         setsearchedText(value);
                     }}>
                         <option value='1'>Patient No</option>
                         <option value='Admission No'>Admission No</option>
+                        <option value='Name'>ID Number</option>
                         <option value='Name'>Names</option>
-
                     </Select>
+                    <Select className='w-25' placeholder='Search by . . . ' onSearch={(value) => {
+                        setsearchedText(value);
+                    }}>
+                        <option value='1'>Patient No</option>
+                        <option value='Admission No'>Admission No</option>
+                        <option value='Name'>ID Number</option>
+                        <option value='Name'>Names</option>
+                        <option value='Name'>Mobile</option>
+                        <option value='Name'>Scheme</option>
+                        <option value='Name'>Membership No</option>
+                    </Select>
+                    <RangePicker />
+
                     <div className="dropdown border border-1 rounded">
                         <Link className="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             Export File To
@@ -244,4 +264,4 @@ const Appointmentlist = () => {
         </div>
     );
 };
-export default Appointmentlist;
+export default Theatreday;

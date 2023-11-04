@@ -18,7 +18,7 @@ const rowSelection = {
         name: record.name,
     }),
 };
-const Appointmentlist = () => {
+const Dispatchedobservationlist = () => {
     const [searchedText, setsearchedText] = useState('');
     const [selectionType, setSelectionType] = useState('checkbox');
 
@@ -179,7 +179,7 @@ const Appointmentlist = () => {
     return (
         <div>
             <div className="d-flex justify-content-between aign-items center">
-                <h5 className="card-title h4"><u>Appointment List</u></h5>
+                <h5 className="card-title h4"><u>Dispachted Observation List</u></h5>
                 <BiEdit style={{ fontSize: 20, marginRight: 12, cursor: "pointer" }} />
             </div>
             <Divider />
@@ -187,7 +187,9 @@ const Appointmentlist = () => {
                 <ReloadOutlined style={{ fontSize: 20, padding: 8, cursor: "pointer" }} />
                 <div className=" d-flex text-center gap-3">
                     <Link to="/addPatient" className="btn btn-primary">Book New Appointment</Link>
-                    <div className="dropdown">
+                    <Link href="#" className="btn btn-secondary">View Appointment List</Link>
+
+                    {/* <div className="dropdown">
                         <Link className="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             Dispatch To
                         </Link>
@@ -200,7 +202,7 @@ const Appointmentlist = () => {
                             <li><Link className="dropdown-item" to="#">CCC</Link></li>
                             <li><Link className="dropdown-item" to="#">ANC</Link></li>
                         </ul>
-                    </div>
+                    </div> */}
                     <Link href="#" className="btn btn-primary">Edit Page</Link>
                 </div>
             </div>
@@ -244,4 +246,4 @@ const Appointmentlist = () => {
         </div>
     );
 };
-export default Appointmentlist;
+export default Dispatchedobservationlist;
