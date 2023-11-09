@@ -30,6 +30,7 @@ const Sigonout = () => {
     };
     const menuStyle = {
         boxShadow: 'none',
+        
     };
     return (
         <Dropdown
@@ -58,7 +59,7 @@ const Sigonout = () => {
         >
             <a onClick={(e) => e.preventDefault()}>
                 <Space style={{ gap: 3, paddingBlockStart: 3 }}>
-                <DownOutlined  className='p-3' />
+                <DownOutlined  className='p-3'  style={{ color: "#67336d" }} />
 
                 </Space>
             </a>

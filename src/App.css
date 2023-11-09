@@ -58,11 +58,26 @@ main {
 }
 
 .btn-primary{
-  background-color: #D6B300;
+  background-color: #67336d;
   border: none;
+  color: #fff !important;
 }
 
 .btn-secondary{
   background-color: #62c1db;
   border: none;
+}
+
+.ant-layout .ant-layout-sider-trigger {
+  display: none !important;
+}
+
+.logo{
+  margin: 0;
+  height: 64px;
+  width: 230px;
+}
+
+h1,h2,h3,h4,h5,h6, a{
+  color: #67336d !important;
 }

@@ -49,6 +49,8 @@ import PhysioGymList from "./pages/PhysioGymList";
 import Mother from "./pages/Mother";
 import Child from "./pages/Child";
 import MCH from "./pages/MCH";
+import WardMgt from "./pages/WardMgt";
+import TheatreNurse from "./pages/TheatreNurse";
 
 function AppRoutes(params) {
 
@@ -103,7 +105,8 @@ function AppRoutes(params) {
                     <Route path="/Mother-list" element={<Mother />} />
                     <Route path="/Child-list" element={<Child />} />
                     <Route path="/MCH" element={<MCH />} />
-
+                    <Route path="/Ward-Management" element={<WardMgt />} />
+                    <Route path="/theatre-Nurse" element={<TheatreNurse />} />
                     <Route path="/Nutrition-outpatient-list" element={<NutritionOutpatient />} />
                     <Route path="/Nutrition-Inpatient-list" element={<NutritionInpatient />} />
 

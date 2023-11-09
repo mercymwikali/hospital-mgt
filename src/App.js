@@ -9,11 +9,17 @@ function App() {
       theme={{
         token: {
           colorPrimary: '#4d6e94',
+          colorBorder:'#67336d',
+          colorPrimaryBg	:'#47a5db',
+          colorText:'#fff'
         },
         components: {
           Menu: {
-            itemSelectedBg: '#D6B300',
-            itemColor: '#fff'
+            itemSelectedBg: '#67336d',
+            itemColor: '#fff',
+            itemSelectedColor:'#fff',
+            itemHoverBg:'rgba(103, 51, 109, 0.6)',
+            itemHoverColor:'#fff'
           },
           Input:{
             hoverBorderColor:'#62c1db',
@@ -21,8 +27,11 @@ function App() {
             activeShadow:'rgb(0, 0, 0)'
           },
           Table:{
-            headerBg	:'#4d6e94',
-            itemColor:"#000"
+            headerBg	:'#67336d',
+            itemColor:"#fff"
+          },
+          Dropdown:{
+            itemColor:'#000'
           }
         }
       }}>

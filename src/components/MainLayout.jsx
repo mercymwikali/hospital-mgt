@@ -9,7 +9,7 @@ import { TbRadioactive, TbMassage, TbDental } from 'react-icons/tb'
 import { LuBaby } from 'react-icons/lu'
 import { IoNutritionOutline, IoNutritionSharp } from 'react-icons/io5'
 import Sigonout from './Signout';
-
+import logo from '../assets/images/logo.png'
 
 const { Header, Content, Footer, Sider } = Layout;
 const MainLayout = () => {
@@ -19,13 +19,14 @@ const MainLayout = () => {
         token: { colorBgContainer },
     } = theme.useToken();
     return (
-        <Layout hasSider>
+        <Layout className='mt-0' >
             <Sider
                 className='sidemenu'
                 // trigger={null}
-                 collapsible collapsed={collapsed}
+                collapsible collapsed={collapsed}
                 breakpoint="md"
                 collapsedWidth={collapsed ? 0 : 230}
+                inlineCollapsed={collapsed}
                 onBreakpoint={(broken) => {
                     console.log(broken);
                 }}
@@ -39,17 +40,29 @@ const MainLayout = () => {
                     left: 0,
                     top: 0,
                     bottom: 0,
+                    backgroundColor: '#47a5db'
                 }}
             >
-                <div className="demo-logo-vertical" />
+                <div className="logo text-center">
+                    <img
+                        src={logo}
+                        height={64}
+                        style={{ maxWidth :'100%', marginTop: '0' }}
+                        alt="Logo"
+                    />
+                </div>
+
                 <Menu
-                    theme="dark"
+                    theme="light"
                     mode="inline"
                     defaultSelectedKeys={['/']}
-                    inlineCollapsed={collapsed}
                     onClick={(item) => {
                         //item.key
                         navigate(item.key);
+                    }}
+                    style={{
+                        backgroundColor: '#47a5db'
+
                     }}
                     items={[
                         {
@@ -191,12 +204,11 @@ const MainLayout = () => {
                         },
                         {
                             key: '/procurement',
-                            type: 'group',
+                            icon: <BiPurchaseTag />,
                             label: 'Procurement/Store',
                             children: [
                                 {
                                     key: '/purchase-req',
-                                    icon: <BiPurchaseTag />,
                                     label: 'Purchase Requisition'
                                 }
                             ]
@@ -225,6 +237,49 @@ const MainLayout = () => {
                             key: '/nurses',
                             icon: <FaUserNurse />,
                             label: 'Nurse',
+                            children: [
+                                {
+                                    key: 'Patient-Amdn',
+                                    label: 'Admit Patient'
+                                },
+                                {
+                                    key: '/Ward-Management',
+                                    label: 'Ward Management'
+                                },
+                                {
+                                    key: '/Outpatient-visits',
+                                    label: 'Outpatient visits'
+                                },
+                                {
+                                    key: '/Inpatient',
+                                    label: 'Current Inpatients'
+                                },
+                                {
+                                    key: '/past-doctor-visit',
+                                    label: 'Past Doctor Visit'
+                                },
+
+                                {
+                                    key: '/theatre-Nurse',
+                                    label: 'Theatre Nurse'
+                                },
+                                {
+                                    key: '/procedure-queues',
+                                    label: 'Procedure Queues'
+                                },
+                                {
+                                    key: '/Discharge-req',
+                                    label: 'Discharge Requests'
+                                },
+                                {
+                                    key: '/Discharge-list',
+                                    label: 'Discharge List'
+                                },
+                                // {
+                                //     key: '/purchase-req',
+                                //     label: 'Purchase Requisition'
+                                // },
+                            ]
                         },
                         {
                             key: '/Pharmacy',
@@ -391,7 +446,7 @@ const MainLayout = () => {
                                     key: '/walk-in',
                                     label: 'Walk In List'
                                 },
-                                
+
                             ]
                         },
                         {
@@ -429,23 +484,23 @@ const MainLayout = () => {
                 >
                     <Button
                         type="text"
-                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                        icon={collapsed ? <MenuUnfoldOutlined style={{ color: "#67336d" }} /> : <MenuFoldOutlined style={{ color: "#67336d" }} />}
                         onClick={() => setCollapsed(!collapsed)}
                         style={{
                             fontSize: '16px',
                             width: 64,
                             height: 64,
                         }}
-                        // className='d-sm-none d-md-block'
+                    // className='d-sm-none d-md-block'
                     />
                     <div className="d-flex gap-4 pe-4"
                         style={{ justifyContent: 'space-evenly', alignItems: 'center', paddingRight: 12, cursor: 'pointer' }}>
                         <div className="d-flex gap-4">
                             <Badge count={10} dot>
-                                <MailOutlined style={{ fontSize: 22 }} />
+                                <MailOutlined style={{ fontSize: 22, color: "#67336d" }} />
                             </Badge>
                             <Badge count={20}>
-                                <BellFilled style={{ fontSize: 22 }} />
+                                <BellFilled style={{ fontSize: 22, color: "#67336d" }} />
                             </Badge>
                         </div>
 
@@ -454,7 +509,7 @@ const MainLayout = () => {
                                 style={{
                                     fontSize: 22
                                 }}
-                                icon={<UserOutlined />}
+                                icon={<UserOutlined style={{ color: "#67336d" }} />}
                             />
                             <Sigonout />
                         </Badge>
