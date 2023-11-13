@@ -22,7 +22,7 @@ const MainLayout = () => {
         <Layout className='mt-0' >
             <Sider
                 className='sidemenu'
-                // trigger={null}
+                trigger={null}
                 collapsible collapsed={collapsed}
                 breakpoint="md"
                 collapsedWidth={collapsed ? 0 : 230}
@@ -33,21 +33,12 @@ const MainLayout = () => {
                 onCollapse={(collapsed, type) => {
                     console.log(collapsed, type);
                 }}
-                style={{
-                    overflow: 'auto',
-                    height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    backgroundColor: '#47a5db'
-                }}
             >
                 <div className="logo text-center">
                     <img
                         src={logo}
                         height={64}
-                        style={{ maxWidth :'100%', marginTop: '0' }}
+                        style={{ maxWidth: '100%', marginTop: '0' }}
                         alt="Logo"
                     />
                 </div>
@@ -61,13 +52,15 @@ const MainLayout = () => {
                         navigate(item.key);
                     }}
                     style={{
-                        backgroundColor: '#47a5db'
+                        backgroundColor: 'transparent',
+                        height: '100%',
+                        color: '#fff'
 
                     }}
                     items={[
                         {
                             key: '/',
-                            icon: <AppstoreOutlined />,
+                            icon: <AppstoreOutlined style={{ color: '#fff' }} />,
                             label: 'Dashboard',
                         },
                         {
@@ -87,7 +80,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/appointements',
-                            icon: <CheckSquareOutlined />,
+                            icon: <CheckSquareOutlined style={{ color: '#fff' }} />,
                             label: 'Appointements',
                             children: [
                                 {
@@ -106,7 +99,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/triage',
-                            icon: <DropboxCircleFilled />,
+                            icon: <DropboxCircleFilled style={{ color: '#fff' }} />,
                             label: 'Triage',
                             children: [
                                 {
@@ -133,7 +126,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/doctors',
-                            icon: <FaUserDoctor />,
+                            icon: <FaUserDoctor style={{ color: '#fff' }} />,
                             label: 'Doctor',
                             children: [
                                 {
@@ -204,7 +197,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/procurement',
-                            icon: <BiPurchaseTag />,
+                            icon: <BiPurchaseTag style={{ color: '#fff' }} />,
                             label: 'Procurement/Store',
                             children: [
                                 {
@@ -220,7 +213,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/Dental',
-                            icon: <TbDental />,
+                            icon: <TbDental style={{ color: '#fff' }} />,
                             label: 'Dental',
                             children: [
                                 {
@@ -235,7 +228,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/nurses',
-                            icon: <FaUserNurse />,
+                            icon: <FaUserNurse style={{ color: '#fff' }} />,
                             label: 'Nurse',
                             children: [
                                 {
@@ -283,7 +276,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/Pharmacy',
-                            icon: <GiMedicines />,
+                            icon: <GiMedicines style={{ color: '#fff' }} />,
                             label: 'Pharmacy',
                             children: [
                                 {
@@ -310,7 +303,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/Radiology',
-                            icon: <FaRadiation />,
+                            icon: <FaRadiation style={{ color: '#fff' }} />,
                             label: 'Radiology',
                             children: [
                                 {
@@ -337,12 +330,12 @@ const MainLayout = () => {
                         },
                         {
                             key: '/theatre',
-                            icon: <FaEyeDropper />,
+                            icon: <FaEyeDropper style={{ color: '#fff' }} />,
                             label: 'Theatre',
                         },
                         {
                             key: '/Laboratory',
-                            icon: <GiSoapExperiment />,
+                            icon: <GiSoapExperiment style={{ color: '#fff' }} />,
                             label: 'Laboratory',
                             children: [
                                 {
@@ -377,7 +370,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/dialysis',
-                            icon: <FaEyeDropper />,
+                            icon: <FaEyeDropper style={{ color: '#fff' }} />,
                             label: 'Dialysis',
                             children: [
                                 {
@@ -423,7 +416,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/Physio',
-                            icon: <TbMassage />,
+                            icon: <TbMassage style={{ color: '#fff' }} />,
                             label: 'Physiotherapy',
                             children: [
                                 {
@@ -451,7 +444,7 @@ const MainLayout = () => {
                         },
                         {
                             key: '/Nutrition',
-                            icon: <IoNutritionSharp />,
+                            icon: <IoNutritionSharp style={{ color: '#fff' }} />,
                             label: 'Nutrition',
                             children: [
                                 {
@@ -521,11 +514,13 @@ const MainLayout = () => {
                     <Breadcrumb
                         style={{
                             margin: '4px',
+                            color:'#67336d'
+
                         }}
                     >
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                         <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                        <Breadcrumb.Item >App</Breadcrumb.Item>
                     </Breadcrumb>
                     <Content
                         style={{
@@ -549,6 +544,7 @@ const MainLayout = () => {
                 <Footer
                     style={{
                         textAlign: 'center',
+                        color:'#67336d'
                     }}
                 >
                     HMIS ©2023 Created by MayFair

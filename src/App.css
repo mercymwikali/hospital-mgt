@@ -29,11 +29,12 @@ body{
 }
 
 .sidemenu{
-  height: 100%;
-  position: fixed;
-  left: 0;
-  overflow-y: auto;
-  
+  height: 100dvh !important;
+  position: fixed !important;
+  left:0 !important;
+  overflow-y: auto !important;
+  top: 0 !important;
+  background-color: #47a5db !important  ;
 }
 
 .header{
@@ -81,3 +82,9 @@ main {
 h1,h2,h3,h4,h5,h6, a{
   color: #67336d !important;
 }
+
+.border-primary{
+  border: 1px solid #67336d !important;
+}
+
+

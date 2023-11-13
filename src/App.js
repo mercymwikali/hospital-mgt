@@ -11,15 +11,15 @@ function App() {
           colorPrimary: '#4d6e94',
           colorBorder:'#67336d',
           colorPrimaryBg	:'#47a5db',
-          colorText:'#fff'
+          colorText:'#fff',
         },
         components: {
           Menu: {
             itemSelectedBg: '#67336d',
-            itemColor: '#fff',
+            itemColor: '#67336d',
             itemSelectedColor:'#fff',
             itemHoverBg:'rgba(103, 51, 109, 0.6)',
-            itemHoverColor:'#fff'
+            itemHoverColor:'#fff',
           },
           Input:{
             hoverBorderColor:'#62c1db',
@@ -32,6 +32,10 @@ function App() {
           },
           Dropdown:{
             itemColor:'#000'
+          },
+          Tabs:{
+            colorTextDescription:'#000'
+
           }
         }
       }}>
