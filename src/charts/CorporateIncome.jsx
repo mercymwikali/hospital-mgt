@@ -1,113 +1,63 @@
 import React from 'react';
-import { Column } from '@ant-design/charts';
+import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer } from 'recharts';
 
-const CorporateIncome = () => {
-    const data = [
-        {
-          name: 'Corporate',
-          month: 'Jan.',
-          averageRainfall: 18.9,
-        },
-        {
-          name: 'Corporate',
-          month: 'Feb.',
-          averageRainfall: 28.8,
-        },
-        {
-          name: 'Corporate',
-          month: 'Mar.',
-          averageRainfall: 39.3,
-        },
-        {
-          name: 'Corporate',
-          month: 'Apr.',
-          averageRainfall: 81.4,
-        },
-        {
-          name: 'Corporate',
-          month: 'May',
-          averageRainfall: 47,
-        },
-        {
-          name: 'Corporate',
-          month: 'Jun.',
-          averageRainfall: 20.3,
-        },
-        {
-          name: 'Corporate',
-          month: 'Jul.',
-          averageRainfall: 24,
-        },
-        {
-          name: 'Corporate',
-          month: 'Aug.',
-          averageRainfall: 35.6,
-        },
-        {
-          name: 'Cash',
-          month: 'Jan.',
-          averageRainfall: 12.4,
-        },
-        {
-          name: 'Cash',
-          month: 'Feb.',
-          averageRainfall: 23.2,
-        },
-        {
-          name: 'Cash',
-          month: 'Mar.',
-          averageRainfall: 34.5,
-        },
-        {
-          name: 'Cash',
-          month: 'Apr.',
-          averageRainfall: 99.7,
-        },
-        {
-          name: 'Cash',
-          month: 'May',
-          averageRainfall: 52.6,
-        },
-        {
-          name: 'Cash',
-          month: 'Jun.',
-          averageRainfall: 35.5,
-        },
-        {
-          name: 'Cash',
-          month: 'Jul.',
-          averageRainfall: 37.4,
-        },
-        {
-          name: 'Cash',
-          month: 'Aug.',
-          averageRainfall: 42.4,
-        },
-      ];
-    
-      const config = {
-        data,
-        isGroup: true,
-        xField: 'month',
-        yField: 'averageRainfall',
-        seriesField: 'name',
-        label: {
-          position: 'middle',
-          layout: [
-            {
-              type: 'interval-adjust-position',
-            },
-            {
-              type: 'interval-hide-overlap',
-            },
-            {
-              type: 'adjust-color',
-            },
-          ],
-        },
-      };
-    
-      return <Column {...config} />;
-    };;
+const data = [
+  {
+    name: 'Jan.',
+    Corporate: 18.9,
+    Cash: 12.4,
+  },
+  {
+    name: 'Feb.',
+    Corporate: 28.8,
+    Cash: 23.2,
+  },
+  {
+    name: 'Mar.',
+    Corporate: 39.3,
+    Cash: 34.5,
+  },
+  {
+    name: 'Apr.',
+    Corporate: 81.4,
+    Cash: 99.7,
+  },
+  {
+    name: 'May',
+    Corporate: 47,
+    Cash: 52.6,
+  },
+  {
+    name: 'Jun.',
+    Corporate: 20.3,
+    Cash: 35.5,
+  },
+  {
+    name: 'Jul.',
+    Corporate: 24,
+    Cash: 37.4,
+  },
+  {
+    name: 'Aug.',
+    Corporate: 35.6,
+    Cash: 42.4,
+  },
+];
+
+function CorporateIncome() {
+  return (
+    <ResponsiveContainer width="100%" height="100%" >
+      <BarChart width={500} height={450} data={data} title='Average Monthly Income'>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="Corporate" fill="#8884d8" name="Corporate" />
+        <Bar dataKey="Cash" fill="#82ca9d" name="Cash" />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
 
 export default CorporateIncome;

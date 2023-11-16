@@ -3,6 +3,9 @@ import { UserOutlined, ArrowUpOutlined, UsergroupAddOutlined, CreditCardOutlined
 import { Avatar, Card } from 'antd';
 import { Link } from 'react-router-dom';
 import CorporateIncome from '../charts/CorporateIncome';
+import Area from '../charts/Area';
+import Donut from '../charts/Donut';
+
 import MyCalendar from '../components/Calendar';
 
 
@@ -86,11 +89,25 @@ const Dashboard = () => {
         </Link>
       </div>
       <div className="row mt-3 g-3">
+        <div className="ps-4" style={{ color: '#82ca9d' }}><h6 >Average Monthly Income</h6></div>
         <div className="col-12 col-md-8 ">
+
           <CorporateIncome />
         </div>
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-md-4 px-3">
+        <div className="ps-4" style={{ color: '#82ca9d' }}><h6 >Appointments Calendar</h6></div>
+
           <MyCalendar />
+        </div>
+      </div>
+      <div className="row mt-3 g-3">
+        <div className="ps-4" style={{ color: '#82ca9d' }}><h6 >Average Monthly Income</h6></div>
+        <div className="col-12 col-md-8 ">
+          <Area/>
+                 </div>
+        <div className="col-12 col-md-4">
+        <div className="ps-4" style={{ color: '#82ca9d' }}><h6 >Average Admitted Patients</h6></div>
+          <Donut />
         </div>
       </div>
     </div>
