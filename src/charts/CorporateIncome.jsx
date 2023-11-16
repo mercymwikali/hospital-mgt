@@ -47,7 +47,7 @@ const data = [
 function CorporateIncome() {
   return (
     <ResponsiveContainer width="100%" height="100%" >
-      <BarChart width={400} height={450} data={data} title='Average Monthly Income'>
+      <BarChart width={400} height={300} data={data} title='Average Monthly Income'>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
