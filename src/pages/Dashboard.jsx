@@ -12,9 +12,9 @@ const Dashboard = () => {
     <div className="container-fluid mx-0">
       <div className="row g-3">
         {[
-          { title: 'Current Patient List', link: '/patient-list' },
+          { title: ' Patient List', link: '/patient-list' },
           { title: 'Inpatient List', link: '/Inpatient' },
-          { title: 'Current Discharge List', link: '/Discharge-list' },
+          { title: ' Discharge List', link: '/Discharge-list' },
           { title: "Doc's Appointment", link: '/patient-list' },
         ].map((item, index) => (
           <Link key={index} to={item.link} className="col-6 col-md-3 text-decoration-none">
