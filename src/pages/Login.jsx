@@ -18,7 +18,7 @@ const Login = () => {
               className='pb-2 img-fluid logo'
             />
           </div>
-          <div className="row g-3 my-3" style={{ backgroundColor: '#fff' }}>
+          <div className="row g-3 mt-2" style={{ backgroundColor: '#fff' }}>
             <div className="text-center col-12">
               <h3 className='py-1 fw-bold'>Login to your Account</h3>
               <p className='fs-6 fst-italic'>Enter Your Email and Password to access your Account</p>
@@ -26,6 +26,7 @@ const Login = () => {
             <div className='row g-3'>
               <div className="col-12">
                 <div className="input-group mb-2">
+                    <label className='py-2'>Username <span className='text-danger py-2'>*</span> </label>
                   <Input
                     placeholder="Enter your username"
                     prefix={<UserOutlined className="site-form-item-icon" style={{ color: "#67336d" }} />}
@@ -41,6 +42,8 @@ const Login = () => {
 
               <div className="col-12">
                 <div className="input-group mb-3">
+                <label className='py-2'>Password <span className='text-danger py-2'>*</span> </label>
+
                   <Input
                     placeholder="username"
                     prefix={<RiLockPasswordLine className="site-form-item-icon" style={{ color: "#67336d" }} />}
