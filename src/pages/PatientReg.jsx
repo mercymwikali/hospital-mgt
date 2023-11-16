@@ -1,24 +1,26 @@
-import React from 'react'
-import { Tabs, Card, Avatar, Descriptions, Input, DatePicker } from 'antd';
-import TabPane from 'antd/es/tabs/TabPane';
-import { IoInformation, IoBook } from 'react-icons/io5';
-import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined } from '@ant-design/icons';
-import { BiCalendar, BiEdit } from 'react-icons/bi';
+import React from 'react';
+import { Tabs, Avatar, Input, DatePicker, Select, Card } from 'antd';
+import { BiEdit, BiCalendar } from 'react-icons/bi';
+import { ReloadOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+
+const { TabPane } = Tabs;
+const { Option } = Select;
 
 const PatientReg = () => {
     return (
-        <div className="card border-primary py-2 px-2 ">
-            <div className="card-body">
-                <div className="d-block d-md-flex justify-content-between align-items-center">
-                    <h5 className="card-title h3"><u>Patient Registration</u></h5>
-                    <div className="d-flex justify-content-center align-items-center gap-2">
-                        <Link to="/patient-list" className="btn btn-primary m-2">Add Patient</Link>
-                        <BiEdit style={{ fontSize: 20, marginRight: 12, cursor: "pointer" }} />
-                        <ReloadOutlined style={{ fontSize: 20, padding: 8, cursor: "pointer" }} />
-
-                    </div>
-                </div>
+        <div className="card border-primary py-2 px-2">
+        <div className="card-body">
+          <div className="d-block d-md-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-end align-items-center gap-2">
+              <ReloadOutlined style={{ fontSize: 20, padding: 8, cursor: 'pointer' }} />
+              <BiEdit style={{ fontSize: 20, marginRight: 12, cursor: 'pointer' }} />
+            </div>
+            <h5 className="card-title h3">
+              <u>Patient Registration</u>
+            </h5>
+            
+          </div>
                 <Tabs defaultActiveKey='1'>
                     <TabPane tab='Patient Information'>
                         <Avatar className="card-text" size={100}></Avatar>
@@ -50,7 +52,7 @@ const PatientReg = () => {
                                     }} />
                             </div>
                             <div className="col-12 col-md-4 text-primary">
-                                <label className='py-1'>Choose Gender :</label><select className="form-select form-select-sm" aria-label="Default select example" style={{border:'1px solid #67336d'}}>
+                                <label className='py-1'>Choose Gender :</label><select className="form-select form-select-sm" aria-label="Default select example" style={{ border: '1px solid #67336d' }}>
                                     <option selected></option>
                                     <option value="female">Female</option>
                                     <option value="male">Male</option>
@@ -83,7 +85,7 @@ const PatientReg = () => {
                         </div>
                         <div className="row g-3 my-1 align-items-center justify-content-center">
                             <div className="col-12 col-md-4 text-primary">
-                                <label className='py-1'>Patient/Kin's Relationship:</label><select className="form-select form-select-sm" aria-label="Default select example" style={{border:'1px solid #67336d'}}>
+                                <label className='py-1'>Patient/Kin's Relationship:</label><select className="form-select form-select-sm" aria-label="Default select example" style={{ border: '1px solid #67336d' }}>
                                     <option value="--Select Relationship--" className='text-grey'>--Select Relationship--</option>
                                     <option value="Assistant Chairperson">Assistant Chairperson</option>
                                     <option value="Aunt">Aunt</option>
@@ -128,14 +130,14 @@ const PatientReg = () => {
                         </div>
                         <div className="row g-3 my-1 align-items-center justify-content-center">
                             <div className="col-12 col-md-4 text-primary">
-                                <label className='py-1'>Patient Type:</label> <select className="form-select form-select-sm" aria-label="Default select example" style={{border:'1px solid #67336d'}}>
+                                <label className='py-1'>Patient Type:</label> <select className="form-select form-select-sm" aria-label="Default select example" style={{ border: '1px solid #67336d' }}>
                                     <option selected></option>
                                     <option value="Corporate">Corporate</option>
                                     <option value="Cash">Cash</option>
                                 </select>
                             </div>
                             <div className="col-12 col-md-4 text-primary">
-                                <label className='py-1'>Insurance:</label><select className="form-select form-select-sm" aria-label="Default select example" style={{border:'1px solid #67336d'}}>
+                                <label className='py-1'>Insurance:</label><select className="form-select form-select-sm" aria-label="Default select example" style={{ border: '1px solid #67336d' }}>
                                     <option selected></option>
                                     <option value="Corporate">Corporate</option>
                                     <option value="Cash">Cash</option>

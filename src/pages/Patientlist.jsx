@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Divider, Radio, Table } from 'antd';
-import { BiCalendar, BiEdit } from 'react-icons/bi';
+import { Divider, Table, Button, Space } from 'antd';
+import { BiEdit } from 'react-icons/bi';
 import { UserOutlined, MailOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
-
 import { Link } from 'react-router-dom';
 
 const columns = [
@@ -106,52 +105,45 @@ const data = [
     },
 ];
 
-// Now the 'data' array matches the specified column headers.
-
-
-// rowSelection object indicates the need for row selection
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    getCheckboxProps: (record) => ({
-        disabled: record.name === 'Disabled User',
-        // Column configuration not to be checked
-        name: record.name,
-    }),
-};
 const Patientlist = () => {
     const [selectionType, setSelectionType] = useState('checkbox');
+
+    const rowSelection = {
+        onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        },
+        getCheckboxProps: (record) => ({
+            disabled: record.name === 'Disabled User',
+            name: record.name,
+        }),
+    };
     return (
         <div>
-            <div className="d-flex justify-content-between aign-items center">
-                <h5 className="card-title h4"><u>Patient List</u></h5>
-                <BiEdit style={{ fontSize: 20, marginRight: 12, cursor:"pointer" }} />
-            </div>
+            <h5 className="card-title h4"><u>Patient List</u></h5>
             <Divider />
             <div className="d-flex align-items-center justify-content-between gap-3 mb-3">
-                <ReloadOutlined style={{fontSize:20, padding:8,  cursor:"pointer"}} />
+                <ReloadOutlined style={{ fontSize: 20, padding: 8, cursor: 'pointer' }} />
                 <div className=" d-flex text-center gap-3">
                     <Link to="/addPatient" className="btn btn-primary">Add Patient</Link>
                     <Link href="#" className="btn btn-secondary">Create a Visit</Link>
                     <Link href="#" className="btn btn-primary">Edit Page</Link>
-                    <Link to='/patient-list' className="btn btn-danger"><DeleteOutlined className='px-2'/>Delete</Link>
+                    <Link to='/patient-list' className="btn btn-danger"><DeleteOutlined className='px-2' />Delete</Link>
                 </div>
             </div>
             <div className="table-responsive-lg">
-               <Table
-                rowSelection={{
-                    type: selectionType,
-                    ...rowSelection,
-                }}
-                columns={columns}
-                dataSource={data}
-                scroll='scroll'
-                style={{color:"#fff"}}
-                className='table'
-            />  
+                <Table
+                    rowSelection={{
+                        type: selectionType,
+                        ...rowSelection,
+                    }}
+                    columns={columns}
+                    dataSource={data}
+                    scroll={{ x: true }}
+                    style={{ color: "#fff" }}
+                    className='table'
+                />
             </div>
-           
+
         </div>
     );
 };
