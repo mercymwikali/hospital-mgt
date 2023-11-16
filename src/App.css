@@ -12,6 +12,8 @@
 body{
   font-family: 'Nunito Sans', sans-serif;
   scroll-behavior: smooth;
+  transition: 'all 0.2s',
+
 }
 
 .ant-layout-sider {
@@ -32,9 +34,10 @@ body{
   height: 100dvh !important;
   position: fixed !important;
   left:0 !important;
-  overflow-y: auto !important;
   top: 0 !important;
   background-color: #47a5db !important  ;
+  transition: 0.2s ease;
+
 }
 
 .header{
@@ -49,12 +52,12 @@ body{
   top: 0;
   height: 64 !important;
   line-height: 64px;
-  z-index: 1;
 }
 
 main {
   overflow-y: scroll !important;
   height: 100%;
+
   
 }
 
@@ -76,7 +79,10 @@ main {
 .logo{
   margin: 0;
   height: 64px;
-  width: 230px;
+  transition: 0.2s ease;
+  /* width: 80px;
+  justify-content: center;
+  align-items: center; */
 }
 
 h1,h2,h3,h4,h5,h6, a{
@@ -87,4 +93,90 @@ h1,h2,h3,h4,h5,h6, a{
   border: 1px solid #67336d !important;
 }
 
+.cardhover:hover{
+  color: #fff !important;
+  background-color: #67336d !important;
+  transition: 0.3 ease;
+}
 
+.sign-in__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.sign-in__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.sign-in__wrapper form {
+  width: 24rem;
+  max-width: 90%;
+  z-index: 1;
+  animation: showSignInForm 1s;
+}
+
+.sign-in__wrapper form img {
+  width: 4rem;
+}
+
+@keyframes showSignInForm {
+  0%,
+  30% {
+    transform: translate(0, -150%);
+  }
+  70%,
+  90% {
+    transform: translate(0, 1rem);
+  }
+  80%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .sidemenu {
+    display: block; /* Hide the Sider component on smaller screens */
+    z-index: 1;
+  }
+
+  .ant-layout-sider {
+    flex: 0 0 230px !important;
+    max-width: 230px !important;
+    min-width: 230px !important;
+    width: 230px !important;
+    height: 100dvh !important;
+    overflow-y: scroll !important;
+  }
+  
+  .ant-layout-sider-collapsed {
+    flex: 0 0 80px !important;
+    max-width: 0px !important;
+    min-width:0px !important;
+    width: 0 !important;
+  }
+
+  .contentStyle {
+    margin-left: 0; /* Adjust content margin for smaller screens */
+    width: 100%;
+    padding: 0;
+  }
+
+  main {
+    margin-left: 0 !important;
+  }
+
+
+  
+}

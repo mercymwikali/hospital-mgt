@@ -13,7 +13,38 @@ import logo from '../assets/images/logo.png'
 
 const { Header, Content, Footer, Sider } = Layout;
 const MainLayout = () => {
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(true);
+    const [openKeys, setOpenKeys] = useState(['/']);
+    const rootSubmenuKeys = [
+        '/',
+        '/patient-registration',
+        '/appointements',
+        '/triage',
+        '/doctors',
+        '/procurement',
+        '/Protocal and Guidelines',
+        '/Dental',
+        '/nurses',
+        '/Pharmacy',
+        '/Radiology',
+        '/theatre',
+        '/Laboratory',
+        '/dialysis',
+        '/MCH',
+        '/Physio',
+        '/Nutrition',
+    ];
+
+    const onOpenChange = (keys) => {
+        const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+        setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+        if (latestOpenKey && rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+            setOpenKeys(keys);
+        } else {
+            setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+        }
+    }
+
     const navigate = useNavigate();
     const {
         token: { colorBgContainer },
@@ -34,28 +65,23 @@ const MainLayout = () => {
                     console.log(collapsed, type);
                 }}
             >
-                <div className="logo text-center">
-                    <img
-                        src={logo}
-                        height={64}
-                        style={{ maxWidth: '100%', marginTop: '0' }}
-                        alt="Logo"
-                    />
-                </div>
-
                 <Menu
                     theme="light"
                     mode="inline"
                     defaultSelectedKeys={['/']}
-                    onClick={(item) => {
-                        //item.key
-                        navigate(item.key);
+                    openKeys={openKeys}
+                    onOpenChange={onOpenChange}
+                    onClick={({ key }) => {
+                        navigate(key);
                     }}
                     style={{
                         backgroundColor: 'transparent',
                         height: '100%',
-                        color: '#fff'
-
+                        color: '#fff',
+                        paddingTop: '70px',
+                        paddingBottom: '90px',
+                        overflowY: 'scroll',
+                        transition: '0.2s ease'
                     }}
                     items={[
                         {
@@ -461,51 +487,55 @@ const MainLayout = () => {
                 />
             </Sider>
             <Layout className="site-layout"
-                style={{
-                    marginLeft: collapsed ? 80 : 230,
-                }}
+
             >
                 <Header
                     style={{
                         padding: 0,
-                        background: colorBgContainer,
+                        backgroundColor: '#47a5db',
                         zIndex: 1
-
                     }}
                     className='header'
 
                 >
-                    <Button
-                        type="text"
-                        icon={collapsed ? <MenuUnfoldOutlined style={{ color: "#67336d" }} /> : <MenuFoldOutlined style={{ color: "#67336d" }} />}
-                        onClick={() => setCollapsed(!collapsed)}
-                        style={{
-                            fontSize: '16px',
-                            width: 64,
-                            height: 64,
-                        }}
-                    // className='d-sm-none d-md-block'
-                    />
-                    <div className="d-flex gap-4 pe-4"
-                        style={{ justifyContent: 'space-evenly', alignItems: 'center', paddingRight: 12, cursor: 'pointer' }}>
-                        <div className="d-flex gap-4">
-                            <Badge count={10} dot>
-                                <MailOutlined style={{ fontSize: 22, color: "#67336d" }} />
-                            </Badge>
-                            <Badge count={20}>
-                                <BellFilled style={{ fontSize: 22, color: "#67336d" }} />
-                            </Badge>
-                        </div>
-
-                        <Badge>
-                            <Avatar
-                                style={{
-                                    fontSize: 22
-                                }}
-                                icon={<UserOutlined style={{ color: "#67336d" }} />}
+                    <div className="d-flex justify-content-evenly align-items-center">
+                        <Button
+                            type="text"
+                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                            onClick={() => setCollapsed(!collapsed)}
+                            style={{
+                                fontSize: '22px',
+                                width: 64,
+                                height: 64,
+                            }}
+                        // className='d-sm-none d-md-block'
+                        />
+                        <div className="logo text-center px-2">
+                            <img
+                                src={logo}
+                                height={60}
+                                style={{ maxWidth: collapsed ? '80px' : '100%', marginTop: '0' }}
+                                alt="Logo"
                             />
-                            <Sigonout />
-                        </Badge>
+                        </div>
+                    </div>
+
+                    <div className="d-flex gap-4 pe-4"
+                        style={{cursor: 'pointer' }}>
+                            <Badge count={20} className='pt-2'>
+                                <BellFilled style={{ fontSize: 22 }} />
+                            </Badge>
+                            <Badge>
+                                <Avatar
+                                    style={{
+                                        fontSize: 22
+                                    }}
+                                    icon={<UserOutlined />}
+                                />
+                                <Sigonout />
+                            </Badge>
+
+
                     </div>
 
                 </Header>
@@ -513,8 +543,10 @@ const MainLayout = () => {
                 <Layout>
                     <Breadcrumb
                         style={{
-                            margin: '4px',
-                            color:'#67336d'
+                            marginLeft: collapsed ? 80 : 230,
+                            color: '#67336d',
+                            padding: 12,
+                            transition: 'all 0.2s',
 
                         }}
                     >
@@ -522,35 +554,28 @@ const MainLayout = () => {
                         <Breadcrumb.Item>List</Breadcrumb.Item>
                         <Breadcrumb.Item >App</Breadcrumb.Item>
                     </Breadcrumb>
-                    <Content
+                    <Content className='contentStyle'
                         style={{
-                            margin: '18px 10px 0',
-                            overflow: 'initial',
+                            marginLeft: collapsed ? 80 : 230,
+                            transition: 'all 0.2s',
+                            padding: 24,
+                            background: colorBgContainer,
 
-                        }}
-                    >
-                        <div
-                            style={{
-                                padding: 24,
-                                minHeight: '100%',
-                                background: colorBgContainer,
-                            }}
-                        >
-                            <Outlet />
-                        </div>
+                        }}>
+                        <Outlet />
                     </Content>
                 </Layout>
 
                 <Footer
                     style={{
                         textAlign: 'center',
-                        color:'#67336d'
+                        color: '#67336d'
                     }}
                 >
                     HMIS ©2023 Created by MayFair
                 </Footer>
             </Layout>
-        </Layout>
+        </Layout >
     );
 };
 

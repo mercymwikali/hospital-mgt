@@ -49,7 +49,7 @@ const Sigonout = () => {
                     />
                     <Space
                         style={{
-                            padding: 8,
+                            padding: 3,
                         }}
                     >
                      <Link to='/login' className='text-decoration-none'>   <Button type="danger" className='d-flex gap-3' ><LogoutOutlined style={{color:'red'}}/><p className='text-danger'>Log Out</p></Button></Link>
@@ -59,7 +59,7 @@ const Sigonout = () => {
         >
             <a onClick={(e) => e.preventDefault()}>
                 <Space style={{ gap: 3, paddingBlockStart: 3 }}>
-                <DownOutlined  className='p-3'  style={{ color: "#67336d" }} />
+                <DownOutlined  className='p-1'   />
 
                 </Space>
             </a>
