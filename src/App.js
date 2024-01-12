@@ -8,27 +8,31 @@ function App() {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#4d6e94',
-          colorBorder:'#67336d',
-          colorPrimaryBg	:'#47a5db',
-          colorText:'#fff',
+          colorPrimary: '#002329',
+          colorBorder:'#62c1db',
+          colorPrimaryBg	:'#002329',
+          colorText:'#000',
+          colorIcon:'#FAFAFA'
         },
         components: {
           Menu: {
-            itemSelectedBg: '#67336d',
-            itemColor: '#67336d',
-            itemSelectedColor:'#fff',
-            itemHoverBg:'rgba(103, 51, 109, 0.6)',
-            itemHoverColor:'#fff',
+            itemSelectedBg: '#5DBF9D',
+            itemColor: '#000',
+            itemSelectedColor:'#000',
+            itemHoverBg:'rgba(93,191,157, 0.6)',
+            itemHoverColor:'#000',
           },
           Input:{
-            hoverBorderColor:'#62c1db',
-            activeBorderColor:'#62c1db',
-            activeShadow:'rgb(0, 0, 0)'
+            hoverBorderColor:'#62c1db', 
+            activeBorderColor:'#67336d',
+            // activeShadow:'rgb(0, 0, 0)'
           },
           Table:{
-            headerBg	:'#67336d',
-            itemColor:"#fff"
+            headerBg	:'#007580',
+            headerColor:'#002329',
+            itemColor:"#fff",
+            headerSortActiveBg:'#002329',
+       
           },
           Dropdown:{
             itemColor:'#000'
@@ -36,6 +40,10 @@ function App() {
           Tabs:{
             colorTextDescription:'#000'
 
+          },
+          Select:{
+            // colorText: '#FAFAFA',
+            optionSelectedColor: '#FAFAFA',
           }
         }
       }}>

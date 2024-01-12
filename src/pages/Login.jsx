@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <div className="container-fluid">
       <div className="row justify-content-center align-items-center my-3">
-        <div className="card col-12 col-md-8 col-lg-6 py-5 px-2 text-center" style={{ backgroundColor: "#16a5e4" }}>
+        <div className="card col-12 col-md-8 col-lg-6 py-5 px-2 text-center" style={{ backgroundColor: "#62c1db" }}>
           <div className="text-center">
             <img
               src={logo}
@@ -29,7 +29,7 @@ const Login = () => {
                     <label className='py-2'>Username <span className='text-danger py-2'>*</span> </label>
                   <Input
                     placeholder="Enter your username"
-                    prefix={<UserOutlined className="site-form-item-icon" style={{ color: "#67336d" }} />}
+                    prefix={<UserOutlined className="site-form-item-icon" style={{ color: "#62c1db" }} />}
                     size='large'
                     suffix={
                       <Tooltip title="Extra information">

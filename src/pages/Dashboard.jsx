@@ -2,9 +2,9 @@ import React from 'react';
 import { UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import { Link } from 'react-router-dom';
-import CorporateIncome from '../charts/CorporateIncome';
-import Area from '../charts/Area';
-import Donut from '../charts/Donut';
+import CorporateIncome from '../data/CorporateIncome';
+import Area from '../data/Area';
+import Donut from '../data/Donut';
 import MyCalendar from '../components/Calendar';
 
 const Dashboard = () => {
@@ -24,7 +24,7 @@ const Dashboard = () => {
                   shape="square"
                   size="large"
                   icon={<UsergroupAddOutlined style={{ color: '#fff' }} />}
-                  style={{ backgroundColor: '#67336d' }}
+                  style={{ backgroundColor: '#5DBF9D' }}
                 />
                 <p className='py-2 h5'>{item.title}</p>
                 <p className='h4'>125</p>
@@ -48,7 +48,7 @@ const Dashboard = () => {
                   shape="square"
                   size="large"
                   icon={<UsergroupAddOutlined style={{ color: '#fff' }} />}
-                  style={{ backgroundColor: '#67336d' }}
+                  style={{ backgroundColor: '#5DBF9D' }}
                 />
                 <p className='py-2 h5'>{item.title}</p>
                 <p className='h4'>125</p>

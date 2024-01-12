@@ -492,7 +492,7 @@ const MainLayout = () => {
                 <Header
                     style={{
                         padding: 0,
-                        backgroundColor: '#47a5db',
+                        backgroundColor: '#002329',
                         zIndex: 1
                     }}
                     className='header'
@@ -507,6 +507,7 @@ const MainLayout = () => {
                                 fontSize: '22px',
                                 width: 64,
                                 height: 64,
+                                color:'#fff'
                             }}
                         // className='d-sm-none d-md-block'
                         />
@@ -523,12 +524,13 @@ const MainLayout = () => {
                     <div className="d-flex gap-4 pe-4"
                         style={{cursor: 'pointer' }}>
                             <Badge count={20} className='pt-2'>
-                                <BellFilled style={{ fontSize: 22 }} />
+                                <BellFilled style={{ fontSize: 22, color:'#fff' }} />
                             </Badge>
                             <Badge>
                                 <Avatar
                                     style={{
-                                        fontSize: 22
+                                        fontSize: 22,
+                                        color:'#fff'
                                     }}
                                     icon={<UserOutlined />}
                                 />

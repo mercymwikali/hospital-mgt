@@ -35,7 +35,7 @@ body{
   position: fixed !important;
   left:0 !important;
   top: 0 !important;
-  background-color: #47a5db !important  ;
+  background-color: #002329 !important  ;
   transition: 0.2s ease;
 
 }
@@ -45,7 +45,7 @@ body{
   justify-content: space-between;
   align-items: center;
   background-color:  #f7b36b;
-  color: #4d6e94;
+  color: #002329;
   padding: 8px 12px 8px 12px;
   position: sticky;
   width: 100%;
@@ -85,7 +85,7 @@ main {
   align-items: center; */
 }
 
-h1,h2,h3,h4,h5,h6, a{
+h1,h2,h3,h4,h5,h6{
   color: #67336d !important;
 }
 
@@ -95,7 +95,7 @@ h1,h2,h3,h4,h5,h6, a{
 
 .cardhover:hover{
   color: #fff !important;
-  background-color: #67336d !important;
+  background-color: rgba(93,191,157, 0.6)!important;
   transition: 0.3 ease;
 }
 

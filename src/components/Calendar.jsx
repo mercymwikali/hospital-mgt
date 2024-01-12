@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+// Calendar.jsx
 
-function MyCalendar() {
-  const [value, onChange] = useState(new Date());
+import React from 'react';
+import { DatePicker } from 'antd';
+import PropTypes from 'prop-types';
 
+const Calendar = ({ onChange, value, disabled, placeholder }) => {
   return (
-    <div>
-      <Calendar onChange={onChange} value={value} />
-    </div>
+    <DatePicker
+      onChange={onChange}
+      value={value}
+      disabled={disabled}
+      placeholder={placeholder}
+     style={{width:'100%'}}/>
   );
-}
+};
 
-export default MyCalendar;
+Calendar.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.instanceOf(Date),
+  disabled: PropTypes.bool,
+  placeholder: PropTypes.string,
+};
+
+export default Calendar;

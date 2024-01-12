@@ -59,7 +59,7 @@ const Sigonout = () => {
         >
             <a onClick={(e) => e.preventDefault()}>
                 <Space style={{ gap: 3, paddingBlockStart: 3 }}>
-                <DownOutlined  className='p-1'   />
+                <DownOutlined style={{color:'#fff'}}  className='p-1'   />
 
                 </Space>
             </a>
