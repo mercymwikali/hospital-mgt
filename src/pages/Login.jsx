@@ -1,74 +1,93 @@
-import React from 'react';
-import { Switch } from 'antd';
-import { InfoCircleOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
-import { Input, Tooltip } from 'antd';
-import { RiLockPasswordLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Form, Input, Button, Checkbox, Card, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import logo from '../assets/images/logo.png'
+
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+
+  const onFinish = (values) => {
+    setLoading(true);
+
+    // Simulate API call for authentication (replace with your actual authentication logic)
+    setTimeout(() => {
+      setLoading(false);
+      const { username, password } = values;
+
+      // Check credentials (replace with your actual authentication logic)
+      if (username === 'demo' && password === 'password') {
+        message.success('Login successful!');
+      } else {
+        message.error('Invalid username or password');
+      }
+    }, 1000);
+  };
+
   return (
-    <div className="container-fluid">
-      <div className="row justify-content-center align-items-center my-3">
-        <div className="card col-12 col-md-8 col-lg-6 py-5 px-2 text-center" style={{ backgroundColor: "#62c1db" }}>
-          <div className="text-center">
+    <div className="container-fluid d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+        <div className="d-block justify-content-center align-items-center" style={{ backgroundColor: '#002329', color: '#fff' }}>
+          <div className="logo text-center px-2 py-3">
             <img
               src={logo}
-              height={64}
+              height={60}
+              style={{ marginTop: '0 ' }}
               alt="Logo"
-              className='pb-2 img-fluid logo'
             />
           </div>
-          <div className="row g-3 mt-2" style={{ backgroundColor: '#fff' }}>
-            <div className="text-center col-12">
-              <h3 className='py-1 fw-bold'>Login to your Account</h3>
-              <p className='fs-6 fst-italic'>Enter Your Email and Password to access your Account</p>
-            </div>
-            <div className='row g-3'>
-              <div className="col-12">
-                <div className="input-group mb-2">
-                    <label className='py-2'>Username <span className='text-danger py-2'>*</span> </label>
-                  <Input
-                    placeholder="Enter your username"
-                    prefix={<UserOutlined className="site-form-item-icon" style={{ color: "#62c1db" }} />}
-                    size='large'
-                    suffix={
-                      <Tooltip title="Extra information">
-                        <InfoCircleOutlined style={{ color: "#67336d" }} />
-                      </Tooltip>
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="col-12">
-                <div className="input-group mb-3">
-                <label className='py-2'>Password <span className='text-danger py-2'>*</span> </label>
-
-                  <Input
-                    placeholder="username"
-                    prefix={<RiLockPasswordLine className="site-form-item-icon" style={{ color: "#67336d" }} />}
-                    size='large'
-                    suffix={
-                      <Tooltip title="password">
-                        <InfoCircleOutlined style={{ color: "#67336d" }} />
-                      </Tooltip>
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-             <div className="col-12 d-flex align-items-center">
-                <Switch style={{ color: '#67336d' }} />
-                <label className='ps-2 pt-2' style={{ color: '#67336d', marginBottom: 0 }}>Remember Me</label>
-              </div>
-              <div className="text-center my-3 col-12">
-                <Link to={'/'} type='submit' className='btn btn-primary'><LoginOutlined /> Login</Link>
-              </div>
-          </div>
+          <p className='py-3 text-center h4'>Login</p>
         </div>
+        <Card className="p-2">
+          <Form
+            name="normal_login"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+          >
+            <Form.Item
+              name="username"
+              rules={[{ required: true, message: 'Please input your Username!' }]}
+            >
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon py-3" />}
+                placeholder="Username"
+                className="form-control"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: 'Please input your Password!' }]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon py-3" />}
+                type="password"
+                placeholder="Password"
+                className="form-control"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Form.Item name="remember" valuePropName="checked" noStyle>
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+              <a className="login-form-forgot" href="/">
+                Forgot password
+              </a>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button w-100 mb-2"
+                loading={loading}
+              >
+                Log in
+              </Button>
+              Or <a href="/">register now!</a>
+            </Form.Item>
+          </Form>
+        </Card>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
