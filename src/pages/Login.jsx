@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import logo from '../assets/images/logo.png'
+import logo from '../assets/images/logo.png';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Auth/AuthProvider';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const auth = useAuth(); // Use the useAuth hook to access authentication context
 
-  const onFinish = (values) => {
+  // Extracted the login logic into handleLogin
+  const handleLogin = async (values) => {
     setLoading(true);
 
     // Simulate API call for authentication (replace with your actual authentication logic)
-    setTimeout(() => {
-      setLoading(false);
+    try {
       const { username, password } = values;
 
       // Check credentials (replace with your actual authentication logic)
-      if (username === 'demo' && password === 'password') {
+      if (username === 'test@gmail.com' && password === '123test') {
         message.success('Login successful!');
+        auth.login(username, password); // Update authentication state
+        navigate('/');
       } else {
         message.error('Invalid username or password');
       }
-    }, 1000);
+    } catch (error) {
+      console.error('Login failed:', error);
+      message.error('Login failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,8 +51,8 @@ const Login = () => {
         <Card className="p-2">
           <Form
             name="normal_login"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
+            initialValues={{ username: 'test@gmail.com', password: '123test', remember: true }}
+            onFinish={handleLogin}
           >
             <Form.Item
               name="username"

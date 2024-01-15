@@ -13,7 +13,7 @@ const SelectField = ({ options, placeholder, onChange, value, disabled }) => {
       onChange={onChange}
       value={value}
       disabled={disabled}
-      style={{width:'100%'}}>
+      >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>
           {option.label}

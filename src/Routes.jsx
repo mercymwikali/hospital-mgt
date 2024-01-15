@@ -51,6 +51,7 @@ import Child from "./pages/Child";
 import MCH from "./pages/MCH";
 import WardMgt from "./pages/WardMgt";
 import TheatreNurse from "./pages/TheatreNurse";
+import PrivateRoute from "./Auth/PrivateRoute";
 
 function AppRoutes(params) {
 
@@ -62,55 +63,57 @@ function AppRoutes(params) {
                 <Route path="/forgetPassword" element={<Forgetpassword />} />
                 <Route path="/resetPassword" element={<Resetpassword />} />
                 <Route path="!*" element={< Error />} />
-                <Route path="/" element={<MainLayout />} >
-                    <Route index element={<Dashboard />} />
-                    <Route path="/addPatient" element={<PatientReg />} />
-                    <Route path="/patient-list" element={<Patientlist />} />
-                    <Route path="/add-appointment" element={<AddAppointment />} />
-                    <Route path="/appointment-list" element={<Appointmentlist />} />
-                    <Route path="/dispatched-list" element={<Dispatchedlist />} />
-                    <Route path="/observation-list" element={<Observationlist />} />
-                    <Route path="/walk-in" element={<Walkin />} />
-                    <Route path="/procedure-queues" element={<Procedurequeues />} />
-                    <Route path="/dispatched-observation-list" element={<Dispatchedobservationlist />} />
-                    <Route path="/Outpatient-visits" element={<Outpatientvisits />} />
-                    <Route path="Inpatient" element={<Inpatient />} />
-                    <Route path="/past-doctor-visit" element={<PastDocvisits />} />
-                    <Route path="/Patient-Amdn" element={<PatientAdmn />} />
-                    <Route path="/MCH-outpatient" element={<MCHoutpatient />} />
-                    <Route path="/theatre-day-case" element={<Theatreday />} />
-                    <Route path="/anaesthetistia" element={<Anaesthetistia />} />
-                    <Route path="/Surgeon" element={<Surgeon />} />
-                    <Route path="/Discharge-req" element={<Dischargereq />} />
-                    <Route path="/Discharge-list" element={<Dischargelist />} />
-                    <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
-                    <Route path="/Dental-inpatient" element={<DentalInpatient />} />
-                    <Route path="/pharmacy-list-Outpatient" element={<PharmlListOutpatient />} />
-                    <Route path="/Pharmacy-list-inpatient" element={<PharmListInpatient />} />
-                    <Route path="/Pharmacy-history" element={<PharmacyHistory />} />
-                    <Route path="/pharmacy-list-returns" element={<PharmacylListReturns />} />
-                    <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
-                    <Route path="/Radiology-list-Outpatient" element={<RadiologyOutpatient />} />
-                    <Route path="/Radiology-list-inpatient" element={<RadiologyInpatient />} />
-                    <Route path="/Radiology-history" element={<RadiologyHistory />} />
-                    <Route path="/Lab-history" element={<LabHistory />} />
-                    <Route path="/Lab-list-Outpatient" element={<LabOutpatient />} />
-                    <Route path="/Lab-list-inpatient" element={<LabInpatient />} />
-                    <Route path="/treatment-sheet" element={<TreatmentSheet />} />
-                    <Route path="/Price-list" element={<Pricelist />} />
-                    <Route path="/Physio-list-Outpatient" element={<PhysioOutpatient />} />
-                    <Route path="/Physio-list-inpatient" element={<PhysioInpatient />} />
-                    <Route path="/Physio-history" element={<PhysioHistory />} />
-                    <Route path="/Physio-Gym-list" element={<PhysioGymList/>} />
-                    <Route path="/Mother-list" element={<Mother />} />
-                    <Route path="/Child-list" element={<Child />} />
-                    <Route path="/MCH" element={<MCH />} />
-                    <Route path="/Ward-Management" element={<WardMgt />} />
-                    <Route path="/theatre-Nurse" element={<TheatreNurse />} />
-                    <Route path="/Nutrition-outpatient-list" element={<NutritionOutpatient />} />
-                    <Route path="/Nutrition-Inpatient-list" element={<NutritionInpatient />} />
+                <Route element={<PrivateRoute />}>
+                    <Route path="/" element={<MainLayout />}>
+                        <Route index element={<Dashboard />} />
+                        <Route path="/addPatient" element={<PatientReg />} />
+                        <Route path="/patient-list" element={<Patientlist />} />
+                        <Route path="/add-appointment" element={<AddAppointment />} />
+                        <Route path="/appointment-list" element={<Appointmentlist />} />
+                        <Route path="/dispatched-list" element={<Dispatchedlist />} />
+                        <Route path="/observation-list" element={<Observationlist />} />
+                        <Route path="/walk-in" element={<Walkin />} />
+                        <Route path="/procedure-queues" element={<Procedurequeues />} />
+                        <Route path="/dispatched-observation-list" element={<Dispatchedobservationlist />} />
+                        <Route path="/Outpatient-visits" element={<Outpatientvisits />} />
+                        <Route path="Inpatient" element={<Inpatient />} />
+                        <Route path="/past-doctor-visit" element={<PastDocvisits />} />
+                        <Route path="/Patient-Amdn" element={<PatientAdmn />} />
+                        <Route path="/MCH-outpatient" element={<MCHoutpatient />} />
+                        <Route path="/theatre-day-case" element={<Theatreday />} />
+                        <Route path="/anaesthetistia" element={<Anaesthetistia />} />
+                        <Route path="/Surgeon" element={<Surgeon />} />
+                        <Route path="/Discharge-req" element={<Dischargereq />} />
+                        <Route path="/Discharge-list" element={<Dischargelist />} />
+                        <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
+                        <Route path="/Dental-inpatient" element={<DentalInpatient />} />
+                        <Route path="/pharmacy-list-Outpatient" element={<PharmlListOutpatient />} />
+                        <Route path="/Pharmacy-list-inpatient" element={<PharmListInpatient />} />
+                        <Route path="/Pharmacy-history" element={<PharmacyHistory />} />
+                        <Route path="/pharmacy-list-returns" element={<PharmacylListReturns />} />
+                        <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
+                        <Route path="/Radiology-list-Outpatient" element={<RadiologyOutpatient />} />
+                        <Route path="/Radiology-list-inpatient" element={<RadiologyInpatient />} />
+                        <Route path="/Radiology-history" element={<RadiologyHistory />} />
+                        <Route path="/Lab-history" element={<LabHistory />} />
+                        <Route path="/Lab-list-Outpatient" element={<LabOutpatient />} />
+                        <Route path="/Lab-list-inpatient" element={<LabInpatient />} />
+                        <Route path="/treatment-sheet" element={<TreatmentSheet />} />
+                        <Route path="/Price-list" element={<Pricelist />} />
+                        <Route path="/Physio-list-Outpatient" element={<PhysioOutpatient />} />
+                        <Route path="/Physio-list-inpatient" element={<PhysioInpatient />} />
+                        <Route path="/Physio-history" element={<PhysioHistory />} />
+                        <Route path="/Physio-Gym-list" element={<PhysioGymList />} />
+                        <Route path="/Mother-list" element={<Mother />} />
+                        <Route path="/Child-list" element={<Child />} />
+                        <Route path="/MCH" element={<MCH />} />
+                        <Route path="/Ward-Management" element={<WardMgt />} />
+                        <Route path="/theatre-Nurse" element={<TheatreNurse />} />
+                        <Route path="/Nutrition-outpatient-list" element={<NutritionOutpatient />} />
+                        <Route path="/Nutrition-Inpatient-list" element={<NutritionInpatient />} />
 
-                </Route>
+                    </Route>
+                    </Route>
             </Routes>
         </Router>
     )
