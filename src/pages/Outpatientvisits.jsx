@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { RangePicker, Divider, Radio, Select, Table, DatePicker } from 'antd';
 import { BiCalendar, BiEdit } from 'react-icons/bi';
 import { UserOutlined, MailOutlined, PhoneOutlined, ReloadOutlined } from '@ant-design/icons';
-
 import { Link } from 'react-router-dom';
 import Input from 'antd/es/input/Input';
+import PDFExport from '../components/PDFExport';
 
 
 // rowSelection object indicates the need for row selection
@@ -22,7 +22,7 @@ const Outpatientvisits = () => {
     const [searchedText, setsearchedText] = useState('');
     const [selectionType, setSelectionType] = useState('checkbox');
     const { RangePicker } = DatePicker
-
+    const tableRef = useRef();
 
     const columns = [
         {
@@ -77,7 +77,7 @@ const Outpatientvisits = () => {
         },
         {
             title: 'Insurance',
-            dataIndex:'Insurance',
+            dataIndex: 'Insurance',
             responsive: ['sm'],
 
         },
@@ -223,7 +223,9 @@ const Outpatientvisits = () => {
                         </Link>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li><Link className="dropdown-item" to="#">CSV</Link></li>
-                            <li><Link className="dropdown-item" to="#">PDF</Link></li>
+                            <li>
+                                <PDFExport contentRef={tableRef} fileName="OutpatientVisits" />
+                            </li>
                             <li><Link className="dropdown-item" to="#">EXCEL</Link></li>
                             <li><Link className="dropdown-item" to="#">PRINT</Link></li>
                         </ul>
@@ -231,17 +233,18 @@ const Outpatientvisits = () => {
 
                 </div>
                 <Table
-                    rowSelection={{
-                        type: selectionType,
-                        ...rowSelection,
-                    }}
-                    size='small'
-                    columns={columns}
-                    dataSource={data}
-                    scroll='scroll'
-                    style={{ color: "#fff" }}
-                    className='table'
-                />
+        rowSelection={{
+          type: 'checkbox',
+        }}
+        size="small"
+        columns={columns}
+        dataSource={data}
+        scroll="scroll"
+        style={{ color: '#fff' }}
+        className="table"
+        id="outpatientTable"
+        ref={tableRef} // Attach the ref to the table
+      />
             </div>
 
         </div>

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import MainLayout from "./components/MainLayout";
 import Error from "./pages/Error";
-import SignUp from "./pages/SignUp";
 import Forgetpassword from "./pages/Forgetpassword";
 import Resetpassword from "./pages/Resetpassword";
 import Dashboard from "./pages/Dashboard";
@@ -51,7 +50,10 @@ import Child from "./pages/Child";
 import MCH from "./pages/MCH";
 import WardMgt from "./pages/WardMgt";
 import TheatreNurse from "./pages/TheatreNurse";
-import PrivateRoute from "./Auth/PrivateRoute";
+import PrivateRoute from "./Private/PrivateRoute";
+import DocLayout from "./core/DocLayout";
+import DocDasboard from "./pages/DocDasboard";
+import Register from "./pages/Register";
 
 function AppRoutes(params) {
 
@@ -59,13 +61,12 @@ function AppRoutes(params) {
         <Router>
             <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/SignUp" element={<SignUp />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/forgetPassword" element={<Forgetpassword />} />
                 <Route path="/resetPassword" element={<Resetpassword />} />
-                <Route path="!*" element={< Error />} />
-                <Route element={<PrivateRoute />}>
-                    <Route path="/" element={<MainLayout />}>
-                        <Route index element={<Dashboard />} />
+                <Route path="!/*" element={< Error />} />
+                    <Route path="/" element={<DocLayout />}>
+                        <Route index element={<DocDasboard />} />
                         <Route path="/addPatient" element={<PatientReg />} />
                         <Route path="/patient-list" element={<Patientlist />} />
                         <Route path="/add-appointment" element={<AddAppointment />} />
@@ -111,8 +112,6 @@ function AppRoutes(params) {
                         <Route path="/theatre-Nurse" element={<TheatreNurse />} />
                         <Route path="/Nutrition-outpatient-list" element={<NutritionOutpatient />} />
                         <Route path="/Nutrition-Inpatient-list" element={<NutritionInpatient />} />
-
-                    </Route>
                     </Route>
             </Routes>
         </Router>

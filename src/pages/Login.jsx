@@ -1,103 +1,128 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import logo from '../assets/images/logo.png';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../Auth/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthProvider';
+import { FaCheckCircle, FaTimesCircle, FaUser } from 'react-icons/fa';
+import InputField from '../components/InputField';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import axios from 'axios';
+
+const LOGIN_URL = 'https://my.api.mockaroo.com/patient/register.json?key=e5ad3440&__method=POST';
+
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
   const navigate = useNavigate();
-  const auth = useAuth(); // Use the useAuth hook to access authentication context
+
+  const [user, setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [userFocus, setUserFocus] = useState(false);
+
+  useEffect(() => {
+    const ref = userRef.current;
+    if (ref) {
+      ref.focus();
+    }
+  }, [userRef]);
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [user, pwd])
 
   // Extracted the login logic into handleLogin
-  const handleLogin = async (values) => {
-    setLoading(true);
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    // Simulate API call for authentication (replace with your actual authentication logic)
     try {
-      const { username, password } = values;
+      const response = await axios.post(LOGIN_URL,
+        JSON.stringify({ user, pwd }),
+        {
+          headers: { 'Content-Type': 'Application/json' },
+          // withCredentials:true
+        }
+      );
+      console.log(JSON.stringify(response?.data));
 
-      // Check credentials (replace with your actual authentication logic)
-      if (username === 'test@gmail.com' && password === '123test') {
-        message.success('Login successful!');
-        auth.login(username, password); // Update authentication state
-        navigate('/');
-      } else {
-        message.error('Invalid username or password');
-      }
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      setAuth({ user, pwd, roles, accessToken });
+      setUser('');
+      setPwd('');
+      setSuccess(true);
+      message.success('Login Successful')
     } catch (error) {
-      console.error('Login failed:', error);
-      message.error('Login failed. Please try again.');
-    } finally {
-      setLoading(false);
+      if (!error?.response) {
+        setErrMsg('No Server Response');
+      } else if (error.response?.status === 400) {
+        setErrMsg('Missing Username or Password');
+      } else if (error.response?.status === 401) {
+        setErrMsg('Unauthorized Access');
+      } else {
+        setErrMsg('Login Failed');
+      }
+      errRef.current.focus();
     }
+
+
+
+
   };
 
   return (
-    <div className="container-fluid d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <div className="col-12 col-sm-8 col-md-6 col-lg-4">
-        <div className="d-block justify-content-center align-items-center" style={{ backgroundColor: '#002329', color: '#fff' }}>
-          <div className="logo text-center px-2 py-3">
-            <img
-              src={logo}
-              height={60}
-              style={{ marginTop: '0 ' }}
-              alt="Logo"
-            />
-          </div>
-          <p className='py-3 text-center h4'>Login</p>
+    <>
+      {success ? (
+        navigate('/')
+      ) : (
+        <div className="regContainer">
+          <section>
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live='assertive'>{errMsg}</p>
+            <Card title={'Sign In'} headStyle={{ backgroundColor: '#002329', color: '#fff' }}>
+              <Form>
+                <label htmlFor='username'> <FaUser /> Username :
+                  {/* <FaCheckCircle className={validName ? "valid" : "hide"} />
+              <FaTimesCircle className={validName || !user ? "hide" : "invalid"} /> */}
+                </label>
+                <InputField
+                  type="text"
+                  id="username"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setUser(e.target.value)}
+                  value={user}
+                  required={true}
+                  onFocus={() => setUserFocus(true)}
+                  onBlur={() => setUserFocus(false)}
+                />
+                <div className="mt-2">
+                  <label htmlFor='password'><RiLockPasswordFill /> Password :
+                    {/* <FaCheckCircle className={validPwd ? "valid" : "hide"} />
+                <FaTimesCircle className={validPwd || !pwd ? "hide" : "invalid"} /> */}
+                  </label>
+                  <InputField
+                    type="password"
+                    id="password"
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={pwd}
+                    required={true}
+                  />
+                </div>
+                <div className='mt-3 w-100'>
+                  <Button disabled={!user || !pwd ? true : false} onClick={handleLogin} block>Sign In</Button>
+                </div>
+              </Form>
+            </Card>
+          </section>
         </div>
-        <Card className="p-2">
-          <Form
-            name="normal_login"
-            initialValues={{ username: 'test@gmail.com', password: '123test', remember: true }}
-            onFinish={handleLogin}
-          >
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: 'Please input your Username!' }]}
-            >
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon py-3" />}
-                placeholder="Username"
-                className="form-control"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: 'Please input your Password!' }]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon py-3" />}
-                type="password"
-                placeholder="Password"
-                className="form-control"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-              <a className="login-form-forgot" href="/">
-                Forgot password
-              </a>
-            </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button w-100 mb-2"
-                loading={loading}
-              >
-                Log in
-              </Button>
-              Or <a href="/">register now!</a>
-            </Form.Item>
-          </Form>
-        </Card>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

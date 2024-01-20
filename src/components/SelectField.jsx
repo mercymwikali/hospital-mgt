@@ -1,39 +1,67 @@
-// SelectField.jsx
+import React, { useState } from 'react';
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Legend, Cell } from 'recharts';
+import SelectField from '../components/SelectField';
 
-import React from 'react';
-import { Select } from 'antd';
-import PropTypes from 'prop-types';
+const data = [
+  { name: 'Cardiology', value: 40 },
+  { name: 'Neurology', value: 20 },
+  { name: 'Dermatology', value: 30 },
+];
 
-const { Option } = Select;
+const filterOptions = [
+  { label: 'Weekly', value: 'Weekly' },
+  { label: 'Monthly', value: 'Monthly' },
+  { label: 'Yearly', value: 'Yearly' }, // Corrected the value to 'Yearly'
+];
 
-const SelectField = ({ options, placeholder, onChange, value, disabled }) => {
+const COLORS = ['#006edc', '#efbbff', '#ffc905'];
+
+const DonutChart = () => {
+  const [filter, setFilter] = useState('Weekly'); // Default filter is set to 'Weekly'
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    // You can implement filtering logic based on the selected filter here
+    // For example, you can fetch data for the selected filter
+  };
+
   return (
-    <Select
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-      disabled={disabled}
-      style={{width:'100%'}}>
-      {options.map((option) => (
-        <Option key={option.value} value={option.value}>
-          {option.label}
-        </Option>
-      ))}
-    </Select>
+    <div>
+      <h4>Medical Specialties Distribution</h4>
+      <div>
+        <label>
+          Filter by:
+          <SelectField
+            options={filterOptions}
+            placeholder="--Select Period--"
+            onChange={(value) => handleFilterChange(value)}
+            value={filter}
+            disabled={false}
+          />
+        </label>
+      </div>
+      <ResponsiveContainer width={350} height={300}>
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
+            outerRadius={100}
+            fill="#8884d8"
+            paddingAngle={5}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend verticalAlign="left" align="vertical" />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
-SelectField.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    })
-  ),
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  disabled: PropTypes.bool,
-};
-
-export default SelectField;
+export default DonutChart;

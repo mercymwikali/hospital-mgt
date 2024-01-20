@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { AppstoreOutlined, UserOutlined, CheckSquareOutlined, DropboxCircleFilled, MenuFoldOutlined, MenuUnfoldOutlined, MailOutlined, BellFilled } from '@ant-design/icons';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { AppstoreOutlined, UserOutlined, CheckSquareOutlined, DropboxCircleFilled, MenuFoldOutlined, MenuUnfoldOutlined,  BellFilled } from '@ant-design/icons';
 import { Layout, Menu, theme, Button, Avatar, Badge, Breadcrumb } from 'antd';
 import { FaWheelchair, FaUserDoctor, FaUserNurse, FaEyeDropper, FaRadiation, } from "react-icons/fa6"
 import { BiPurchaseTag } from "react-icons/bi"
 import { GiMedicines, GiSoapExperiment } from 'react-icons/gi'
-import { TbRadioactive, TbMassage, TbDental } from 'react-icons/tb'
+import {TbMassage, TbDental } from 'react-icons/tb'
 import { LuBaby } from 'react-icons/lu'
-import { IoNutritionOutline, IoNutritionSharp } from 'react-icons/io5'
+import {  IoNutritionSharp } from 'react-icons/io5'
 import Sigonout from './Signout';
 import logo from '../assets/images/logo.png'
 
@@ -486,9 +486,7 @@ const MainLayout = () => {
                     ]}
                 />
             </Sider>
-            <Layout className="site-layout"
-
-            >
+            <Layout className="site-layout">
                 <Header
                     style={{
                         padding: 0,

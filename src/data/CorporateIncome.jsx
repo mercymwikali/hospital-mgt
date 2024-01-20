@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer } from 'recharts';
+import { Select } from 'antd';
 
 const data = [
   {
@@ -44,19 +45,69 @@ const data = [
   },
 ];
 
-function CorporateIncome() {
+const filterOptions = [
+  { label: 'All', value: 'all' },
+  { label: 'Corporate', value: 'Corporate' },
+  { label: 'Cash', value: 'Cash' },
+];
+
+const CorporateIncome = () => {
+  const [filter, setFilter] = useState('all');
+  const [filteredData, setFilteredData] = useState(data);
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
+
+  useEffect(() => {
+    // Implement your filtering logic here based on the selected filter
+    // For simplicity, I'm using a direct mapping between filter values and data
+    const filtered = {
+      all: data,
+      Corporate: data.map(entry => ({ name: entry.name, Corporate: entry.Corporate })),
+      Cash: data.map(entry => ({ name: entry.name, Cash: entry.Cash })),
+    }[filter];
+
+    setFilteredData(filtered || data);
+  }, [filter]);
+
   return (
-    <ResponsiveContainer width="100%" height="100%" >
-      <BarChart width={400} height={300} data={data} title='Average Monthly Income'>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Corporate" fill="#8884d8" name="Corporate" />
-        <Bar dataKey="Cash" fill="#82ca9d" name="Cash" />
-      </BarChart>
-    </ResponsiveContainer>
+    <div>
+      <h4>Average Monthly Income</h4>
+      <div>
+        <label>
+          Filter by:
+          <Select
+            className='mx-2'
+            defaultValue="all"
+            onChange={handleFilterChange}
+          >
+            {filterOptions.map((option) => (
+              <Select.Option key={option.value} value={option.value}>
+                {option.label}
+              </Select.Option>
+            ))}
+          </Select>
+        </label>
+      </div>
+      <ResponsiveContainer width={400} height={300}>
+        <BarChart width={400} height={300} data={filteredData}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {filter === 'all' && (
+            <>
+              <Bar dataKey="Corporate" fill="#ffc905" name="Corporate" />
+              <Bar dataKey="Cash" fill="#006edc" name="Cash" />
+            </>
+          )}
+          {filter === 'Corporate' && <Bar dataKey="Corporate" fill="#ffc905" name="Corporate" />}
+          {filter === 'Cash' && <Bar dataKey="Cash" fill="#006edc" name="Cash" />}
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

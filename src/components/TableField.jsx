@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable, useSortBy, usePagination } from 'react-table';
+import { useTable, useSortBy, usePagination, useFilters } from 'react-table';
 import { Button, Space, Tooltip } from 'antd';
 import {
   EditOutlined,
@@ -31,14 +31,15 @@ const TableField = ({ columns, data, actions, OnFilter }) => {
       data,
       initialState: { pageIndex: 0 },
     },
+    useFilters,  // Use useFilters before useSortBy
     useSortBy,
     usePagination
   );
-
+  
   return (
     <div className="table-responsive">
       <table {...getTableProps()} className="table table-hover table-striped">
-      <thead>
+        <thead>
           {headerGroups.map((headerGroup, index) => (
             <tr key={index} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
@@ -59,11 +60,7 @@ const TableField = ({ columns, data, actions, OnFilter }) => {
                       ''
                     )}
                   </span>
-                  {column.Filter && (
-                    <div>
-                      {column.render('Filter')}
-                    </div>
-                  )}
+                  {column.render('Filter')} {/* Include the filter UI */}
                 </th>
               ))}
               {actions && <th scope="col">Actions</th>}
@@ -133,9 +130,8 @@ const TableField = ({ columns, data, actions, OnFilter }) => {
           </ButtonGroup>
         </div>
         <div className="d-flex">
-          
           <span className='d-flex'>
-          <label> Go to page:{' '} </label> 
+            <label> Go to page:{' '} </label>
             <input
               type="number"
               value={pageIndex + 1}
@@ -161,11 +157,7 @@ const TableField = ({ columns, data, actions, OnFilter }) => {
             style={{ width: '20%' }}
           />
         </div>
-
-
       </div>
-
-
     </div>
   );
 };
