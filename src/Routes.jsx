@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import MainLayout from "./components/MainLayout";
 import Error from "./pages/Error";
@@ -54,67 +54,80 @@ import PrivateRoute from "./Private/PrivateRoute";
 import DocLayout from "./core/DocLayout";
 import DocDasboard from "./pages/DocDasboard";
 import Register from "./pages/Register";
+import Unauthorized from "./pages/Unauthorized";
+
+const ROLES = {
+    'User': 'non-medic',
+    'Nurse': 'nurse',
+    'Admin': 'Admin',
+    'Doc': 'Doc'
+}
+
 
 function AppRoutes(params) {
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/forgetPassword" element={<Forgetpassword />} />
-                <Route path="/resetPassword" element={<Resetpassword />} />
-                <Route path="!/*" element={< Error />} />
-                    <Route path="/" element={<DocLayout />}>
-                        <Route index element={<DocDasboard />} />
-                        <Route path="/addPatient" element={<PatientReg />} />
-                        <Route path="/patient-list" element={<Patientlist />} />
-                        <Route path="/add-appointment" element={<AddAppointment />} />
-                        <Route path="/appointment-list" element={<Appointmentlist />} />
-                        <Route path="/dispatched-list" element={<Dispatchedlist />} />
-                        <Route path="/observation-list" element={<Observationlist />} />
-                        <Route path="/walk-in" element={<Walkin />} />
-                        <Route path="/procedure-queues" element={<Procedurequeues />} />
-                        <Route path="/dispatched-observation-list" element={<Dispatchedobservationlist />} />
-                        <Route path="/Outpatient-visits" element={<Outpatientvisits />} />
-                        <Route path="Inpatient" element={<Inpatient />} />
-                        <Route path="/past-doctor-visit" element={<PastDocvisits />} />
-                        <Route path="/Patient-Amdn" element={<PatientAdmn />} />
-                        <Route path="/MCH-outpatient" element={<MCHoutpatient />} />
-                        <Route path="/theatre-day-case" element={<Theatreday />} />
-                        <Route path="/anaesthetistia" element={<Anaesthetistia />} />
-                        <Route path="/Surgeon" element={<Surgeon />} />
-                        <Route path="/Discharge-req" element={<Dischargereq />} />
-                        <Route path="/Discharge-list" element={<Dischargelist />} />
-                        <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
-                        <Route path="/Dental-inpatient" element={<DentalInpatient />} />
-                        <Route path="/pharmacy-list-Outpatient" element={<PharmlListOutpatient />} />
-                        <Route path="/Pharmacy-list-inpatient" element={<PharmListInpatient />} />
-                        <Route path="/Pharmacy-history" element={<PharmacyHistory />} />
-                        <Route path="/pharmacy-list-returns" element={<PharmacylListReturns />} />
-                        <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
-                        <Route path="/Radiology-list-Outpatient" element={<RadiologyOutpatient />} />
-                        <Route path="/Radiology-list-inpatient" element={<RadiologyInpatient />} />
-                        <Route path="/Radiology-history" element={<RadiologyHistory />} />
-                        <Route path="/Lab-history" element={<LabHistory />} />
-                        <Route path="/Lab-list-Outpatient" element={<LabOutpatient />} />
-                        <Route path="/Lab-list-inpatient" element={<LabInpatient />} />
-                        <Route path="/treatment-sheet" element={<TreatmentSheet />} />
-                        <Route path="/Price-list" element={<Pricelist />} />
-                        <Route path="/Physio-list-Outpatient" element={<PhysioOutpatient />} />
-                        <Route path="/Physio-list-inpatient" element={<PhysioInpatient />} />
-                        <Route path="/Physio-history" element={<PhysioHistory />} />
-                        <Route path="/Physio-Gym-list" element={<PhysioGymList />} />
-                        <Route path="/Mother-list" element={<Mother />} />
-                        <Route path="/Child-list" element={<Child />} />
-                        <Route path="/MCH" element={<MCH />} />
-                        <Route path="/Ward-Management" element={<WardMgt />} />
-                        <Route path="/theatre-Nurse" element={<TheatreNurse />} />
-                        <Route path="/Nutrition-outpatient-list" element={<NutritionOutpatient />} />
-                        <Route path="/Nutrition-Inpatient-list" element={<NutritionInpatient />} />
-                    </Route>
-            </Routes>
-        </Router>
-    )
+        <Routes>
+            <Route path="/login" element={<Login />} />
+            {/* public routes */}
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgetPassword" element={<Forgetpassword />} />
+            <Route path="/resetPassword" element={<Resetpassword />} />
+            <Route path="*" element={<Error />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+
+            {/* protected routes */}
+            <Route path="/" element={<PrivateRoute />}>
+                <Route path='/' element={<MainLayout />}>
+                    <Route index element={<DocDasboard />} />
+                    <Route path="/addPatient" element={<PatientReg />} />
+                    <Route path="/patient-list" element={<Patientlist />} />
+                    <Route path="/add-appointment" element={<AddAppointment />} />
+                    <Route path="/appointment-list" element={<Appointmentlist />} />
+                    <Route path="/dispatched-list" element={<Dispatchedlist />} />
+                    <Route path="/observation-list" element={<Observationlist />} />
+                    <Route path="/walk-in" element={<Walkin />} />
+                    <Route path="/procedure-queues" element={<Procedurequeues />} />
+                    <Route path="/dispatched-observation-list" element={<Dispatchedobservationlist />} />
+                    <Route path="/Outpatient-visits" element={<Outpatientvisits />} />
+                    <Route path="Inpatient" element={<Inpatient />} />
+                    <Route path="/past-doctor-visit" element={<PastDocvisits />} />
+                    <Route path="/Patient-Amdn" element={<PatientAdmn />} />
+                    <Route path="/MCH-outpatient" element={<MCHoutpatient />} />
+                    <Route path="/theatre-day-case" element={<Theatreday />} />
+                    <Route path="/anaesthetistia" element={<Anaesthetistia />} />
+                    <Route path="/Surgeon" element={<Surgeon />} />
+                    <Route path="/Discharge-req" element={<Dischargereq />} />
+                    <Route path="/Discharge-list" element={<Dischargelist />} />
+                    <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
+                    <Route path="/Dental-inpatient" element={<DentalInpatient />} />
+                    <Route path="/pharmacy-list-Outpatient" element={<PharmlListOutpatient />} />
+                    <Route path="/Pharmacy-list-inpatient" element={<PharmListInpatient />} />
+                    <Route path="/Pharmacy-history" element={<PharmacyHistory />} />
+                    <Route path="/pharmacy-list-returns" element={<PharmacylListReturns />} />
+                    <Route path="/Dental-outpatient" element={<DentalOutpatient />} />
+                    <Route path="/Radiology-list-Outpatient" element={<RadiologyOutpatient />} />
+                    <Route path="/Radiology-list-inpatient" element={<RadiologyInpatient />} />
+                    <Route path="/Radiology-history" element={<RadiologyHistory />} />
+                    <Route path="/Lab-history" element={<LabHistory />} />
+                    <Route path="/Lab-list-Outpatient" element={<LabOutpatient />} />
+                    <Route path="/Lab-list-inpatient" element={<LabInpatient />} />
+                    <Route path="/treatment-sheet" element={<TreatmentSheet />} />
+                    <Route path="/Price-list" element={<Pricelist />} />
+                    <Route path="/Physio-list-Outpatient" element={<PhysioOutpatient />} />
+                    <Route path="/Physio-list-inpatient" element={<PhysioInpatient />} />
+                    <Route path="/Physio-history" element={<PhysioHistory />} />
+                    <Route path="/Physio-Gym-list" element={<PhysioGymList />} />
+                    <Route path="/Mother-list" element={<Mother />} />
+                    <Route path="/Child-list" element={<Child />} />
+                    <Route path="/MCH" element={<MCH />} />
+                    <Route path="/Ward-Management" element={<WardMgt />} />
+                    <Route path="/theatre-Nurse" element={<TheatreNurse />} />
+                    <Route path="/Nutrition-outpatient-list" element={<NutritionOutpatient />} />
+                    <Route path="/Nutrition-Inpatient-list" element={<NutritionInpatient />} />
+                </Route>
+            </Route>
+        </Routes>
+    );
 }
 export default AppRoutes;

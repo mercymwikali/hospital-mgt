@@ -1,23 +1,20 @@
-// import React from 'react';
-// import { Navigate, Outlet, useLocation } from 'react-router-dom';
-// import { useAuth } from '../context/AuthProvider';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
-// const PrivateRoute = () => {
-//   const auth = useAuth();
-//   const location = useLocation(); // Call useLocation to get the location object
+const PrivateRoute = ({ allowedRoles }) => {
+  const { auth } = useAuth();
+  const location = useLocation(); // Call useLocation to get the location object
 
-//   if (!auth) {
-//     console.error('Authentication context is not available.'); // Log an error if auth is not available
-//     return <Navigate to="/login" replace />;
-//   }
+  // Check if auth is defined and has roles
+  if (auth && auth.roles) {
+    // Check if at least one allowed role matches the user's roles
+    const hasPermission = auth.roles.some(role => allowedRoles?.includes(role));
 
-//   if (!auth.user) {
-//     console.log('User is not authenticated. Redirecting to login.'); // Log a message indicating the redirection
-//     return <Navigate to="/login" state={{ from: location }} replace />;
-//   }
+    return hasPermission ? <Outlet /> : <Navigate to="/unauthorized" state={{ from: location }} replace />;
+  }
 
-//   // If the user is authenticated, render the child components
-//   return <Outlet />;
-// };
+  // If auth or auth.roles is undefined, redirect to login
+  return <Navigate to="/login" state={{ from: location }} replace />;
+};
 
-// export default PrivateRoute;
+export default PrivateRoute;

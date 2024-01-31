@@ -1,22 +1,26 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import logo from '../assets/images/logo.png';
-import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthProvider';
-import { FaCheckCircle, FaTimesCircle, FaUser } from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
 import InputField from '../components/InputField';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 
 const LOGIN_URL = 'https://my.api.mockaroo.com/patient/register.json?key=e5ad3440&__method=POST';
 
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const userRef = useRef();
   const errRef = useRef();
-  const navigate = useNavigate();
 
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
@@ -56,8 +60,8 @@ const Login = () => {
       setAuth({ user, pwd, roles, accessToken });
       setUser('');
       setPwd('');
-      setSuccess(true);
-      message.success('Login Successful')
+      message.success('Login Successful');
+      navigate(from, { replace: true });
     } catch (error) {
       if (!error?.response) {
         setErrMsg('No Server Response');
@@ -77,52 +81,46 @@ const Login = () => {
   };
 
   return (
-    <>
-      {success ? (
-        navigate('/')
-      ) : (
-        <div className="regContainer">
-          <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live='assertive'>{errMsg}</p>
-            <Card title={'Sign In'} headStyle={{ backgroundColor: '#002329', color: '#fff' }}>
-              <Form>
-                <label htmlFor='username'> <FaUser /> Username :
-                  {/* <FaCheckCircle className={validName ? "valid" : "hide"} />
+    <div className="regContainer">
+      <section>
+        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live='assertive'>{errMsg}</p>
+        <Card title={'Sign In'} headStyle={{ backgroundColor: '#002329', color: '#fff' }}>
+          <Form>
+            <label htmlFor='username'> <FaUser /> Username :
+              {/* <FaCheckCircle className={validName ? "valid" : "hide"} />
               <FaTimesCircle className={validName || !user ? "hide" : "invalid"} /> */}
-                </label>
-                <InputField
-                  type="text"
-                  id="username"
-                  ref={userRef}
-                  autoComplete="off"
-                  onChange={(e) => setUser(e.target.value)}
-                  value={user}
-                  required={true}
-                  onFocus={() => setUserFocus(true)}
-                  onBlur={() => setUserFocus(false)}
-                />
-                <div className="mt-2">
-                  <label htmlFor='password'><RiLockPasswordFill /> Password :
-                    {/* <FaCheckCircle className={validPwd ? "valid" : "hide"} />
+            </label>
+            <InputField
+              type="text"
+              id="username"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required={true}
+              onFocus={() => setUserFocus(true)}
+              onBlur={() => setUserFocus(false)}
+            />
+            <div className="mt-2">
+              <label htmlFor='password'><RiLockPasswordFill /> Password :
+                {/* <FaCheckCircle className={validPwd ? "valid" : "hide"} />
                 <FaTimesCircle className={validPwd || !pwd ? "hide" : "invalid"} /> */}
-                  </label>
-                  <InputField
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
-                    required={true}
-                  />
-                </div>
-                <div className='mt-3 w-100'>
-                  <Button disabled={!user || !pwd ? true : false} onClick={handleLogin} block>Sign In</Button>
-                </div>
-              </Form>
-            </Card>
-          </section>
-        </div>
-      )}
-    </>
+              </label>
+              <InputField
+                type="password"
+                id="password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required={true}
+              />
+            </div>
+            <div className='mt-3 w-100'>
+              <Button disabled={!user || !pwd ? true : false} onClick={handleLogin} block>Sign In</Button>
+            </div>
+          </Form>
+        </Card>
+      </section>
+    </div>
   );
 };
 

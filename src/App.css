@@ -247,6 +247,13 @@ section {
   display: inline-block;
 }
 
+.flexGrow {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
 @keyframes showSignInForm {
   0%,
   30% {

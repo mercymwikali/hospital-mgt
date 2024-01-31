@@ -1,9 +1,15 @@
-import React from 'react'
+import { Link } from "react-router-dom"
 
 const Error = () => {
-  return (
-    <div>Error</div>
-  )
+    return (
+        <article style={{ padding: "100px" }}>
+            <h1>Oops!</h1>
+            <p>Page Not Found</p>
+            <div className="flexGrow">
+                <Link to="/login">Go back to Login Page</Link>
+            </div>
+        </article>
+    )
 }
 
-export default Error
+export default Error;
